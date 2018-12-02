@@ -359,11 +359,11 @@
 
         <div class="dash">
         <div class="navbar navbar-expand-lg navbar-dark bg-primary" >
-      <a v-b-modal.modal1> <img src="../../assets/png/wrench-2x.png"></a>
+      <a id="popoverButton-sync" > <img src="../../assets/png/wrench-2x.png"></a>
       </div>
       </div>
 
-      <b-modal id="modal1" title="Bootstrap-Vue">
+      <b-popover :show.sync="show" target="popoverButton-sync" title="Add Tags">
       <b-card no-body class="mb-1">
         <b-card-header header-tag="header" class="p-1" role="tab">
           <b-btn block href="#" v-b-toggle.accordion1 variant="info">Left</b-btn>
@@ -420,7 +420,7 @@
       
       <a href="#"  @click.prevent="setPrefs()"> <img src="../../assets/png/file-2x.png"></a>
 
-    </b-modal> 
+ </b-popover>
   </b-container>
 </template>
 <style>
