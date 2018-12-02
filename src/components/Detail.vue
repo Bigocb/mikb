@@ -359,7 +359,7 @@
 
         <div class="dash">
         <div class="navbar navbar-expand-lg navbar-dark bg-primary" >
-      <a href="#" id="popoverButton-sync" > <img src="../../assets/png/wrench-2x.png"></a>
+      <a id="popoverButton-sync" > <img src="../../assets/png/wrench-2x.png"></a>
 
            <b-popover :show.sync="show" target="popoverButton-sync" title="Add Tags">
 
