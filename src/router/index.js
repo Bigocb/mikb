@@ -76,7 +76,11 @@ let router = new Router({
       // meta: {
       //   requiresAuth: true
       // }
-    }
+    },
+    // { path: '/', component: HomePage },
+    // { path: '/login', component: LoginPage },
+    // { path: '/register', component: RegisterPage },
+    { path: '*', redirect: '/' }
   ]
 })
 
