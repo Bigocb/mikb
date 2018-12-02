@@ -12,7 +12,7 @@ import Auth from '@okta/okta-vue'
 Vue.use(Auth, {
   issuer: 'https://dev-603038.oktapreview.com/oauth2/default',
   client_id: '0oahgxw0iqZVLCEjD0h7',
-  redirect_uri: 'http://parents.myplex.life:8080/implicit/callback',
+  redirect_uri: 'http://kb.myplex.life/implicit/callback',
   scope: 'openid profile email'
 })
 
