@@ -25,7 +25,7 @@
     <a class="tagright" href="#" @click.prevent="savetag()">save</a>
      <a class="tagright" href="#" @click="showAddTags = false">close</a>
                 </div>
-                  
+                  </b-popover>
             <p class="text-success">{{post.lastupdate}} </p>
             <div class="alert alert-dismissible alert-secondary">
                 <p class="summary">{{post.summary}}</p>
