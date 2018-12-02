@@ -359,7 +359,7 @@
 
         <div class="dash">
         <div class="navbar navbar-expand-lg navbar-dark bg-primary" >
-      <a href="#" v-b-modal.modal1> <img src="../../assets/png/wrench-2x.png"></a>
+      <a v-b-modal.modal1> <img src="../../assets/png/wrench-2x.png"></a>
       </div>
       </div>
 
