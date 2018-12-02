@@ -1,0 +1,15 @@
+     /* watch: {
+    '$route' (to, from) {
+        console.log(this.$route.params.id)
+     this.updatePost(this.$route.params.id)
+       console.log(this.posts)
+  }
+   }, */
+
+
+     /* beforeRouteUpdate (to, from, next) {
+    console.log(to.params.id)
+    this.posts = api.getSinglePost(to.params.id)
+    console.log(this.posts)
+    next();
+  } */

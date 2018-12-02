@@ -1,0 +1,41 @@
+  <b-modal id="modal1" ref="modal1" title="Bootstrap-Vue">
+<b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion1 variant="info">Create New</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <div>
+       <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
+       <a href="#" @click.prevent="addTags(newTag.tag)"> <img src="../../assets/png/check-2x.png"></a>
+       </div>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion2 variant="info">Add Existing</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+    <select v-model="model.tags">  
+      <option v-for="tag in allTags"  :value="tag.id" v-bind:key="tag.id">
+      {{ tag.tag }}
+      </option>
+    </select>
+    <a href="#"  @click.prevent="populatePostToEdit(model)">Add Tag</a>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion3 variant="info">Remove Tags</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <a href="#"  @click.prevent="deleteTags()">Delete Existing</a>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+  </b-modal>
+  </div>

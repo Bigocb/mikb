@@ -1,0 +1,6 @@
+<a  slot="approve" slot-scope="props"  href="#" @click.prevent="approvePost(props.row.id)">Approve</a>
+
+async  approvePost (id) {
+        await api.approvePost(id) 
+        await this.refreshPosts()
+     }
