@@ -12,7 +12,7 @@ import Auth from '@okta/okta-vue'
 Vue.use(Auth, {
   issuer: 'https://dev-603038.oktapreview.com/oauth2/default',
   client_id: '0oahgxw0iqZVLCEjD0h7',
-  redirect_uri: 'http://kb.myplex.life/implicit/callback',
+  redirect_uri: 'http://parents.myplex.life:8080/implicit/callback',
   scope: 'openid profile email'
 })
 
@@ -32,58 +32,55 @@ let router = new Router({
     {
       path: '/posts-manager',
       name: 'PostsManager',
-      component: PostsManager,
-      meta: {
-        requiresAuth: true
-      }
+      component: PostsManager
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/new-post',
       name: 'NewPost',
-      component: NewPost,
-      meta: {
-        requiresAuth: true
-      }
+      component: NewPost
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/tags/:id',
       name: 'Tags',
-      component: Tags,
-      meta: {
-        requiresAuth: true
-      }
+      component: Tags
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
-      component: Dashboard,
-      meta: {
-        requiresAuth: true
-      }
+      component: Dashboard
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/detail/:id',
       name: 'Detail',
-      component: Detail,
-      meta: {
-        requiresAuth: true
-      }
+      component: Detail
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/Approvals',
       name: 'Approvals',
-      component: Approvals,
-      meta: {
-        requiresAuth: true
-      }
+      component: Approvals
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
-    // { path: '/', component: HomePage },
-    // { path: '/login', component: LoginPage },
-    // { path: '/register', component: RegisterPage },
-    { path: '*', redirect: '/' }
+     { path: '*', redirect: '/' }
   ]
 })
 
-router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
+//router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
 
 export default router
