@@ -49,6 +49,15 @@
           name="password"
           class="form-control"
         >
+              <div class="form-group">
+        <label for="emai">Email Address</label>
+        <input
+          type="email"
+          v-model="user.email"
+          name="email"
+          class="form-control"
+        >
+        </div>
         <div
           v-if="submitted"
           class="invalid-feedback"

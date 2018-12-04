@@ -51,8 +51,7 @@ function register(user) {
         },
         body: JSON.stringify(user)
     };
-
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`http://parents.myplex.life/users/register`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
