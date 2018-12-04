@@ -12,7 +12,9 @@ import VueResource from 'vue-resource'
 import VuePaginate from 'vue-paginate'
 import VueRouter from 'vue-router'
 import VueHighlightJS from 'vue-highlightjs'
-import {ClientTable} from 'vue-tables-2';
+import {
+  ClientTable
+} from 'vue-tables-2';
 var marked = require('marked');
 import wysiwyg from "vue-wysiwyg";
 Vue.use(wysiwyg, {}); // config is 
@@ -20,6 +22,20 @@ import VueMce from 'vue-mce';
 Vue.use(VueMce);
 import tinymce from 'vue-tinymce-editor'
 Vue.component('tinymce', tinymce)
+
+import {
+  store
+} from './_store';
+import {
+  router
+} from './_helpers';
+
+Vue.use(VeeValidate);
+
+import {
+  configureFakeBackend
+} from './_helpers';
+configureFakeBackend();
 
 // ENABLE USE 3RD PARTY PLUGINS
 Vue.use(VueResource);
@@ -29,11 +45,11 @@ Vue.use(BootstrapVue)
 Vue.use(VueSimplemde)
 Vue.config.productionTip = false
 Vue.use(VueHighlightJS);
-Vue.use(ClientTable, {}, false, 'bootstrap4','footerPagination');
+Vue.use(ClientTable, {}, false, 'bootstrap4', 'footerPagination');
 //Vue.use(ClientTable);
 marked.setOptions({
   renderer: new marked.Renderer(),
-  highlight: function(code) {
+  highlight: function (code) {
     return require('highlight.js').highlightAuto(code).value;
   },
   pedantic: true,
@@ -50,14 +66,17 @@ marked.setOptions({
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
-  components: { App
-   }
+  render: h => h(App),
+  components: {
+    App
+  }
 })
 
 Vue.mixin({
   methods: {
-    marked: function(input) {
+    marked: function (input) {
       return marked(input);
     }
   }

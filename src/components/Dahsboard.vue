@@ -267,7 +267,6 @@
   import VueHighlightJS from 'vue-highlightjs'
   import hljs from 'highlight.js'
   
-  import apiOkta from '@/apiOkta'
   export default {
     data() {
   
@@ -278,6 +277,7 @@
         search: '',
         showPlaces: false,
         loading: false,
+                email: {},
         posts-java: [],
         allTags: {},
         model: {},
@@ -293,8 +293,8 @@
     },
     async created() {
       this.refreshPosts()
-      this.temp = await apiOkta.getUser()
-      this.family = await api.getFamily(this.temp.profile.email)
+      this.email = 'bobby.cloutier@gmail.com'
+      this.family = await api.getFamily(this.email)
       this.model = Object.assign({}, this.family, this.approved)
       this.allTags = await api.getTags()
     },
@@ -304,8 +304,8 @@
         this.sortOrders[key] = this.sortOrders[key] * -1
       },
       async refreshPosts() {
-        this.temp = await apiOkta.getUser()
-        this.family = await api.getFamily(this.temp.profile.email)
+      this.email = 'bobby.cloutier@gmail.com'
+      this.family = await api.getFamily(this.email)
         this.posts-java = await api.getCatPosts(this.family.familyid, this.tagcat)
         console.log(this.tagcat)
       },

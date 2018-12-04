@@ -934,9 +934,10 @@ img {
 <script>
   import api from '@/api'
   import VueHighlightJS from 'vue-highlightjs'
+  import store from '../_store'
   import hljs from 'highlight.js'
   import draggable from 'vuedraggable'
-  import apiOkta from '@/apiOkta'
+  import { mapState, mapActions } from "vuex";
   export default {
      components: {
             draggable,
@@ -949,6 +950,8 @@ img {
         reverse: false,
         search: '',
         showPlaces: false,
+        email: {},
+        user:{},
         loading: false,
         postsjava: [],
         postsapproved: [],
@@ -1005,10 +1008,18 @@ img {
         selectedPlace: {}
       }
     },
+      computed: {
+    ...mapState({
+      account: state => state.account,
+      users: state => state.users.all
+    })
+  },
     async created() {
       this.refreshPosts()
-      this.temp = await apiOkta.getUser()
-      this.family = await api.getFamily(this.temp.profile.email)
+      this.email = this.account.user.email
+      console.log(this.account.user.email)
+      console.log(this.email)
+      this.family = await api.getFamily(this.email)
       this.model = Object.assign({}, this.family, this.approved)
       this.allTags = await api.getTags()
     },
@@ -1018,15 +1029,15 @@ img {
         this.sortOrders[key] = this.sortOrders[key] * -1
       },
       async refreshPosts() {
-        this.temp = await apiOkta.getUser()
-        this.family = await api.getFamily(this.temp.profile.email)
-        console.log(this.tagcat)
+        this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
         this.postsjava = await api.getMostReadPosts(this.family.familyid)
         this.postsapproved = await api.getApprovalPosts(this.family.familyid)
         this.postsnew = await api.getRecentPosts(this.family.familyid)
         this.userPrefs = await api.getPrefs(this.family.familyid)
         this.poststodo = await api.getToDos(this.family.familyid)
         this.poststoread = await api.getToRead(this.family.familyid)
+        console.log(this.poststoread)
         this.postsarchive = await api.getArchived(this.family.familyid)
       },
       updateSelected(selectedItem) {

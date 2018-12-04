@@ -351,7 +351,6 @@ import api from '@/api'
 import VueHighlightJS from 'vue-highlightjs'
 import hljs from 'highlight.js'
 
-import apiOkta from '@/apiOkta'
 export default {
     data() {
 
@@ -367,6 +366,7 @@ export default {
             loading: false,
             deleteTag: {},
             posts: [],
+                    email: {},
             allTags: {},
             newTag: {},
             model: {},

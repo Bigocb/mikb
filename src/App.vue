@@ -13,6 +13,7 @@
           <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item> -->
                 <b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
+                <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -67,6 +68,7 @@
 }
 </style>
 <script>
+import { mapState, mapActions } from "vuex";
 import apiOkta from '@/apiOkta'
 import api from '@/api'
 export default {
@@ -75,6 +77,7 @@ export default {
     data() {
         return {
             activeUser: null,
+            email: {},
             posts: [],
             search: '',
             allTags: {},
@@ -114,25 +117,21 @@ export default {
             return this.posts.filter(post => {
                 return post.title.toLowerCase().includes(this.search.toLowerCase())
             })
-        }
+        },
+         ...mapState({
+      account: state => state.account,
+      users: state => state.users.all
+    })
     },
     async created() {
-        await this.refreshActiveUser(),
-            this.refreshPosts(),
-            this.getUser()
+            this.refreshPosts()
     },
 
-    watch: {
-        // everytime a route is changed refresh the activeUser
-        '$route': 'refreshActiveUser'
-    },
     methods: {
-        login() {
-            this.$auth.loginRedirect()
-        },
+
         async refreshPosts() {
-            this.temp = await apiOkta.getUser()
-            this.family = await api.getFamily(this.temp.profile.email)
+      this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
             this.posts = await api.getPosts(this.family.familyid)
             this.allTags = await api.getTags()
         },

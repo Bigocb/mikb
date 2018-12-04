@@ -12,11 +12,19 @@ import VueResource from 'vue-resource'
 import VuePaginate from 'vue-paginate'
 import VueRouter from 'vue-router'
 import VueHighlightJS from 'vue-highlightjs'
-import {ClientTable} from 'vue-tables-2';
+import {
+  ClientTable
+} from 'vue-tables-2';
 var marked = require('marked');
 import wysiwyg from "vue-wysiwyg";
+import VeeValidate from 'vee-validate';
+
+import {
+  store
+} from './_store';
 import draggable from 'vuedraggable'
 Vue.use(wysiwyg, {}); // config is 
+
 
 // ENABLE USE 3RD PARTY PLUGINS
 Vue.use(VueResource);
@@ -26,11 +34,11 @@ Vue.use(BootstrapVue)
 Vue.use(VueSimplemde)
 Vue.config.productionTip = false
 Vue.use(VueHighlightJS);
-Vue.use(ClientTable, {}, false, 'bootstrap4','footerPagination');
+Vue.use(ClientTable, {}, false, 'bootstrap4', 'footerPagination');
 //Vue.use(ClientTable);
 marked.setOptions({
   renderer: new marked.Renderer(),
-  highlight: function(code) {
+  highlight: function (code) {
     return require('highlight.js').highlightAuto(code).value;
   },
   pedantic: true,
@@ -48,14 +56,17 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App,
+  store,
+  render: h => h(App),
+  components: {
+    App,
     draggable
-   }
+  }
 }).$mount('#app')
 
 Vue.mixin({
   methods: {
-    marked: function(input) {
+    marked: function (input) {
       return marked(input);
     }
   }

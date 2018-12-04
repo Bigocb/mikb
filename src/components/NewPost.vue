@@ -2,8 +2,6 @@
   <div class="container-fluid mt-4">
     <b-row>
       <b-col>
-
-          
             <div v-if="showPlaces == false">
 
 
@@ -233,9 +231,9 @@
 <script>
   import api from '@/api'
   import VueHighlightJS from 'vue-highlightjs'
+  import { mapState, mapActions } from "vuex";
   import hljs from 'highlight.js'
   
-  import apiOkta from '@/apiOkta'
   export default {
     data() {
   
@@ -244,6 +242,7 @@
         columns: ['title','category','delete'],
         reverse: false,
         search: '',
+                email: {},
         showPlaces: false,
         loading: false,
         posts: [],
@@ -256,10 +255,16 @@
         selectedPlace: {}
       }
     },
+          computed: {
+    ...mapState({
+      account: state => state.account,
+      users: state => state.users.all
+    })
+  },
     async created() {
       this.refreshPosts()
-      this.temp = await apiOkta.getUser()
-      this.family = await api.getFamily(this.temp.profile.email)
+      this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
       this.model = Object.assign({}, this.family, this.approved)
       this.allTags = await api.getTags()
     },
@@ -269,8 +274,8 @@
         this.sortOrders[key] = this.sortOrders[key] * -1
       },
       async refreshPosts() {
-        this.temp = await apiOkta.getUser()
-        this.family = await api.getFamily(this.temp.profile.email)
+      this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
         this.posts = await api.getPosts(this.family.familyid)
       },
       updateSelected(selectedItem) {
