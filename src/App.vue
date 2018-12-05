@@ -68,7 +68,6 @@
 </style>
 <script>
 import { mapState, mapActions } from "vuex";
-import apiOkta from '@/apiOkta'
 import api from '@/api'
 export default {
 

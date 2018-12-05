@@ -259,9 +259,6 @@
   hljs.initHighlightingOnLoad();
 </script>
 
-<!-- TODO: Allow removal of existing tags, parse tags to individual objects -->
-<!-- TODO: Close edit on clicking of minus button or when switching to another note-->
-<!-- FIXME: Okta works in dev but not prod, if i REMOVE IT DEV doesn't work-->
 <script>
   import api from '@/api'
   import VueHighlightJS from 'vue-highlightjs'

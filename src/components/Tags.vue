@@ -312,7 +312,6 @@ import api from '@/api'
 import VueHighlightJS from 'vue-highlightjs'
 import hljs from 'highlight.js'
 
-import apiOkta from '@/apiOkta'
 export default {
     data() {
 

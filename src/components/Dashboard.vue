@@ -928,9 +928,7 @@ img {
   hljs.initHighlightingOnLoad();
 </script>
 
-<!-- TODO: Allow removal of existing tags, parse tags to individual objects -->
-<!-- TODO: Close edit on clicking of minus button or when switching to another note-->
-<!-- FIXME: Okta works in dev but not prod, if i REMOVE IT DEV doesn't work-->
+
 <script>
   import api from '@/api'
   import VueHighlightJS from 'vue-highlightjs'
@@ -1030,7 +1028,7 @@ img {
       },
       async refreshPosts() {
         this.email = this.account.user.email
-      this.family = await api.getFamily(this.email)
+        this.family = await api.getFamily(this.email)
         this.postsjava = await api.getMostReadPosts(this.family.familyid)
         this.postsapproved = await api.getApprovalPosts(this.family.familyid)
         this.postsnew = await api.getRecentPosts(this.family.familyid)
