@@ -126,7 +126,6 @@ export default {
     async created() {
             this.refreshPosts()
     },
-
     methods: {
 
         async refreshPosts() {
@@ -134,12 +133,6 @@ export default {
       this.family = await api.getFamily(this.email)
             this.posts = await api.getPosts(this.family.familyid)
             this.allTags = await api.getTags()
-        },
-        async refreshActiveUser() {
-            this.activeUser = await this.$auth.getUser()
-        },
-        async getUser() {
-            this.activeUser = await apiOkta.getUser()
         },
         async updateReadCount(id) {
             await api.updateReadCount(id)
@@ -150,11 +143,6 @@ export default {
         },
                     hideModal() {
             this.$refs.modal3.hide()
-        },    
-        async logout() {
-            await this.$auth.logout()
-            await this.refreshActiveUser()
-            this.$router.push('/')
         }
     }
 }
