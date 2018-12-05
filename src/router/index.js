@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import PostsManager from '@/components/PostsManager'
-import Approvals from '@/components/Approvals'
 import NewPost from '@/components/NewPost'
 import Dashboard from '@/components/Dashboard'
 import Detail from '@/components/Detail'
@@ -75,14 +74,6 @@ let router = new Router({
       path: '/detail/:id',
       name: 'Detail',
       component: Detail
-      // meta: {
-      //   requiresAuth: true
-      // }
-    },
-    {
-      path: '/Approvals',
-      name: 'Approvals',
-      component: Approvals
       // meta: {
       //   requiresAuth: true
       // }
