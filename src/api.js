@@ -59,6 +59,10 @@ export default {
   createUserLists(familyid, data) {
     return this.execute('put', `/person/list/${familyid}`, data)
   },
+  deleteUserLists(familyid, data) {
+    console.log(data)
+    return this.execute('delete', `/person/list/${familyid}`, data)
+  },
   updateUserListPosts(familyid, data) {
     console.log(data)
     return this.execute('put', `/person/list/posts/${familyid}`, data)
@@ -69,6 +73,10 @@ export default {
   createUserListPosts(familyid, data) {
     console.log(data)
     return this.execute('post', `/person/list/posts/${familyid}`, data)
+  },
+  deleteUserListPosts(familyid, data) {
+    console.log(data)
+    return this.execute('delete', `/person/list/posts/${familyid}`, data)
   },
   getFamily(email) {
     this.email = this.execute('get', `/person/${email}`)

@@ -8,7 +8,7 @@
             <draggable v-model="myArray">
     <transition-group>
             <div  v-for="post in postsjava"  v-bind:key="post.id">
-              <p >
+              <p>
                 <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
                   <b-card class="dash">
                     <div >

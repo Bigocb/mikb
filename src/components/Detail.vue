@@ -2,7 +2,6 @@
 <article>
     <div class="dash" v-if="showPlaces == false">
         <div v-for="post in posts" v-bind:key="post.id">
-        {{stages}}
             <span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="populatePostToEdit(post)"> <img src="../../assets/png/pencil-2x.png"></a></span>
             <span class="badge badge-pill badge-warning tags"> <a v-if="post.approved === null"  href="#" @click.prevent="approvePost(post.id)"><img src="../../assets/png/check-2x.png"></a></span><span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="deletePost(post.id)"> <img src="../../assets/png/delete-2x.png"></a> </span>
             <h2 class="post-title">{{ post.title }}</h2> 

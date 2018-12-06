@@ -6,11 +6,21 @@
 <a href="#" @click.prevent="addList(newList.newList)"> <img src="../../assets/png/check-2x.png"></a>
 </div>
 <kanban-board :stages="splitJoin(stages.name)" :blocks="blocks" @update-block="updateBlock" >
-  <div v-for="block in blocks" :slot="block.id">
-    <div>
-      {{ block.title }}
-    </div>
+ <div v-for="stagey in splitJoin(stages.name)" :slot="stagey">
+  <a href="#" @click.prevent="deleteList(splitJoin(stagey))"><img src="../../assets/png/check-2x.png"></a>
+  {{stagey}}
   </div>
+ 
+  
+   <div class="fo" v-for="block in blocks" :slot="block.id">
+   
+ <p ><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
+                <div> 
+              {{block.title}}
+            </div>
+           </router-link>           </p>
+           </div>
+
 </kanban-board>
 </div>
 </template>
@@ -23,6 +33,10 @@
   margin-top: 15px;
   padding: 0;
   list-style: none;
+}
+
+.fo {
+    font-size: 4vh;
 }
 
 .resources-list li {
@@ -192,6 +206,8 @@
         model: {},
         id: {},
         newList:{},
+        deletingList: {},
+        deleteFromList: {},
         family: {},
         approved: {
           approved: "1"
@@ -309,6 +325,19 @@
       },
       async getAllTags() {
         this.tags = await api.getTags()
+      },
+    async deleteList(name) {
+        this.deletingList.name = Object.assign(name[0])
+        console.log(this.deletingList)
+        this.tags = await api.deleteUserLists(this.family.familyid, this.deletingList)
+        console.log(this.deletingList)
+               this.refreshPosts()
+      },
+    async deleteListPost(postid,listid) {
+        this.deleteFromList.postid = Object.assign(postid)
+        this.deleteFromList.listid = Object.assign(listid)
+        await api.deleteUserListPosts(this.family.familyid, this.deleteFromList)
+               this.refreshPosts()
       },
       async setPrefs() {
         console.log(this.userPrefs)
