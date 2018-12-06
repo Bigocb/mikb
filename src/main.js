@@ -7,10 +7,13 @@ import BootstrapVue from 'bootstrap-vue'
 import VueSimplemde from 'vue-simplemde'
 import 'simplemde/dist/simplemde.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueResource from 'vue-resource'
 import VuePaginate from 'vue-paginate'
 import VueRouter from 'vue-router'
+
 import VueHighlightJS from 'vue-highlightjs'
 import {
   ClientTable
@@ -33,6 +36,9 @@ Vue.use(VueRouter);
 Vue.use(BootstrapVue)
 Vue.use(VueSimplemde)
 Vue.config.productionTip = false
+import vueKanban from 'vue-kanban'
+
+Vue.use(vueKanban)
 Vue.use(VueHighlightJS);
 Vue.use(ClientTable, {}, false, 'bootstrap4', 'footerPagination');
 //Vue.use(ClientTable);
@@ -60,7 +66,8 @@ new Vue({
   render: h => h(App),
   components: {
     App,
-    draggable
+    draggable,
+    Multiselect
   }
 }).$mount('#app')
 

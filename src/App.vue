@@ -13,6 +13,7 @@
                 <b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
                 <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
+                <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>

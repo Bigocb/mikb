@@ -2,9 +2,21 @@
 <article>
     <div class="dash" v-if="showPlaces == false">
         <div v-for="post in posts" v-bind:key="post.id">
+        {{stages}}
             <span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="populatePostToEdit(post)"> <img src="../../assets/png/pencil-2x.png"></a></span>
             <span class="badge badge-pill badge-warning tags"> <a v-if="post.approved === null"  href="#" @click.prevent="approvePost(post.id)"><img src="../../assets/png/check-2x.png"></a></span><span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="deletePost(post.id)"> <img src="../../assets/png/delete-2x.png"></a> </span>
-            <h2 class="post-title">{{ post.title }}</h2>
+            <h2 class="post-title">{{ post.title }}</h2> 
+            <a id="popoverButton-sync2" variant="primary"  class="badge badge-pill badge-warning tags" href="#">Add to List</a>
+            <b-popover :show.sync="showList" target="popoverButton-sync2" title="Add To List">
+ <select v-model="addList.listid">
+      <option v-for="stage in splitJoin(stages.name)"  :value="stage" v-bind:key="stage">
+      {{ stage}}
+      </option>
+    </select>
+<b-form-textarea rows="1" v-model="addList.listid"></b-form-textarea>
+<a href="#" @click.prevent="addToList(addList.listid,post.id,post.title)"> <img src="../../assets/png/check-2x.png"></a>
+           </b-popover>
+           
             <span v-for="tag in splitJoin(post.tags)">
                 
             <router-link  :to="'/tags/' + tag">
@@ -31,7 +43,7 @@
                 <p class="summary">{{post.summary}}</p>
             </div>
             <div class="alert alert-dismissible alert-secondary">
-                <p v-highlightjs class="post-content" v-html="marked(post.task)"></p>
+                <p @dblclick="showPlaces = true"v-highlightjs class="post-content" v-html="marked(post.task)"></p>
             </div>
                 
         </div>
@@ -350,7 +362,7 @@ hljs.initHighlightingOnLoad();
 import api from '@/api'
 import VueHighlightJS from 'vue-highlightjs'
 import hljs from 'highlight.js'
-
+  import { mapState, mapActions } from "vuex";
 export default {
     data() {
 
@@ -360,7 +372,11 @@ export default {
             reverse: false,
             search: '',
             show: false,
+            showList: false,
             showPlaces: false,
+            stages: {},
+            addList:{},
+            addLToist:{},
             showAddTags: false,
             showTags: false,
             loading: false,
@@ -386,6 +402,12 @@ export default {
     this.posts = api.getSinglePost(to.params.id)
     next();
   },
+        computed: {
+    ...mapState({
+      account: state => state.account,
+      users: state => state.users.all
+    })
+  },
     methods: {
         sortBy: function (key) {
             this.sortKey = key
@@ -393,7 +415,10 @@ export default {
         },
         async refreshPosts() {
             this.posts = await api.getSinglePost(this.$route.params.id)
+            this.email = this.account.user.email
+            this.family = await api.getFamily(this.email)
             this.allTags = await api.getTags()
+             this.stages = await api.getUserLists(this.family.familyid)
         },
         async updatePost(id) {
             console.log(id)
@@ -408,6 +433,16 @@ export default {
         async addTags() {
             console.log(this.newTag)
             await api.addTags(this.newTag)
+               this.posts = await api.getSinglePost(this.$route.params.id)
+               this.allTags = await api.getTags()
+        },
+        async addToList(listid,postid,title) {
+            console.log(this.addList)
+            this.addList.listid = listid
+            this.addList.postid = '' + postid + ''
+            this.addList.name = title
+            console.log(this.addList)
+            await api.createUserListPosts(this.family.familyid,this.addList)
                this.posts = await api.getSinglePost(this.$route.params.id)
                this.allTags = await api.getTags()
         },

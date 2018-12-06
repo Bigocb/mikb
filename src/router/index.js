@@ -5,6 +5,7 @@ import PostsManager from '@/components/PostsManager'
 import NewPost from '@/components/NewPost'
 import Dashboard from '@/components/Dashboard'
 import Detail from '@/components/Detail'
+import list from '@/components/list'
 import Tags from '@/components/Tags'
 import LoginPage from '../login/login'
 import RegisterPage from '../register/RegisterPage'
@@ -28,6 +29,11 @@ let router = new Router({
       path: '/user',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list
     },
     {
       path: '/new-post',
