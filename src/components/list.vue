@@ -12,13 +12,13 @@
   </div>
  
   
-   <div class="fo" v-for="block in blocks" :slot="block.id">
-   
- <p ><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
-                <div> 
+   <div  v-for="block in blocks" :slot="block.id">
+    <p ><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
+                <div class="fo"> 
               {{block.title}}
             </div>
-           </router-link>           </p>
+           </router-link>          <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/check-2x.png"></a>
+ </p>
            </div>
 
 </kanban-board>
@@ -29,14 +29,14 @@
   font-family: 'Lato', 'Avenir', sans-serif;
 }
 
+.fo{
+    font-size: 3vh;
+}
+
 .resources-list {
   margin-top: 15px;
   padding: 0;
   list-style: none;
-}
-
-.fo {
-    font-size: 4vh;
 }
 
 .resources-list li {
