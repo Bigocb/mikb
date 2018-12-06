@@ -21,7 +21,7 @@
     "highlight.js": "^9.13.1",
     "jquery": "^1.9.1",
     "marked": "^0.3.19",
-    "node-sass",
+    "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "scrollto-with-animation": "^4.5.2",
     "simplemde": "^1.11.2",
