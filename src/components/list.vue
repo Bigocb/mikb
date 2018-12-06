@@ -3,7 +3,7 @@
 <b-row class="dash">
 <b-col>
 <b-card>
- <a class="tagright" href="#" @click="showPlaces = true">Add List</a>
+ <a class="tagright" href="#" @click="showPlaces = true"><img src="../../assets/png/plus.png"></a>
  </b-card>
  </b-col>
  </b-row>
