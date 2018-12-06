@@ -1,13 +1,23 @@
 <template>
 <div id="app">
+<b-row class="dash">
+<b-col>
+<b-card>
  <a class="tagright" href="#" @click="showPlaces = true">Add List</a>
+ </b-card>
+ </b-col>
+ </b-row>
+ 
+<b-row class="dash">
+<b-col>
+<b-card>
 <div v-if="showPlaces == true">
 <b-form-textarea rows="1" v-model="newList.name"></b-form-textarea>
-<a href="#" @click.prevent="addList(newList.newList)"> <img src="../../assets/png/check-2x.png"></a>
+<a href="#" @click.prevent="addList(newList.newList)"> <img src="../../assets/png/x.png"></a>
 </div>
 <kanban-board :stages="splitJoin(stages.name)" :blocks="blocks" @update-block="updateBlock" >
  <div v-for="stagey in splitJoin(stages.name)" :slot="stagey">
-  <a href="#" @click.prevent="deleteList(splitJoin(stagey))"><img src="../../assets/png/check-2x.png"></a>
+  <a href="#" @click.prevent="deleteList(splitJoin(stagey))"><img src="../../assets/png/x.png"></a>
   {{stagey}}
   </div>
  
@@ -17,11 +27,14 @@
                 <div class="fo"> 
               {{block.title}}
             </div>
-           </router-link>          <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/check-2x.png"></a>
+           </router-link>          <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/x.png"></a>
  </p>
            </div>
 
 </kanban-board>
+ </b-card>
+ </b-col>
+ </b-row>
 </div>
 </template>
 <style>
