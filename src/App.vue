@@ -14,7 +14,7 @@
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
                 <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
                 <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
-                <h5></h5><b-nav-item  class="badge badge-pill badge-danger" to="/approvals">{{postsapproved.length}}</b-nav-item></h5>
+                <h5></h5><b-nav-item  class="badge badge-pill badge-danger bsize" to="/approvals">{{postsapproved.length}}</b-nav-item></h5>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -57,6 +57,11 @@
            margin-left:5px;
            margin-top:3px;
     width: 100px;
+}
+.bsize {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    height: 30px;
 }
 .long {
     column-count: 3;
