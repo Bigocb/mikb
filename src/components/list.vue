@@ -1,17 +1,8 @@
 <template>
-<div id="app">
-<b-row class="dash">
-<b-col>
-<b-card>
- <a class="tagright" href="#" @click="showPlaces = true"><img src="../../assets/png/plus.png"></a>
- </b-card>
- </b-col>
- </b-row>
+<div>
+
  
-<b-row class="dash">
-<b-col>
-<b-card>
-<div v-if="showPlaces == true">
+<div v-if="showPlaces == true" class="dash">
 <b-form-textarea rows="1" v-model="newList.name"></b-form-textarea>
 <a href="#" @click.prevent="addList(newList.newList)"> <img src="../../assets/png/x.png"></a>
 </div>
@@ -33,9 +24,9 @@
            </div>
 
 </kanban-board>
- </b-card>
- </b-col>
- </b-row>
+        <div >
+      <a class="tagright" href="#" @click="showPlaces = true"><img src="../../assets/png/plus.png"></a>
+      </div>
 </div>
 </template>
 <style>
