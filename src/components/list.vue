@@ -23,6 +23,7 @@
  
   
    <div  v-for="block in blocks" :slot="block.id">
+   
     <p ><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
                 <div class="fo"> 
               {{block.title}}

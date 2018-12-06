@@ -7,6 +7,7 @@ import Dashboard from '@/components/Dashboard'
 import Detail from '@/components/Detail'
 import list from '@/components/list'
 import Tags from '@/components/Tags'
+import Approvals from '@/components/Approvals'
 import LoginPage from '../login/login'
 import RegisterPage from '../register/RegisterPage'
 
@@ -29,6 +30,11 @@ let router = new Router({
       path: '/user',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/approvals',
+      name: 'Approvals',
+      component: Approvals
     },
     {
       path: '/list',

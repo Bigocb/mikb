@@ -14,6 +14,7 @@
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
                 <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
                 <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
+                <h5></h5><b-nav-item  class="badge badge-pill badge-danger" to="/approvals">{{postsapproved.length}}</b-nav-item></h5>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -78,6 +79,7 @@ export default {
             activeUser: null,
             email: {},
             posts: [],
+            postsapproved: [],
             search: '',
             allTags: {},
         }
@@ -130,6 +132,7 @@ export default {
         async refreshPosts() {
       this.email = this.account.user.email
       this.family = await api.getFamily(this.email)
+      this.postsapproved = await api.getApprovalPosts(this.family.familyid)
             this.posts = await api.getPosts(this.family.familyid)
             this.allTags = await api.getTags()
         },
