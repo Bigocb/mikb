@@ -52,9 +52,9 @@ let router = new Router({
       component: Tags
     },
     {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard
+      path: '/front',
+      name: 'Front',
+      component: Front
     },
     {
       path: '/detail/:id',
