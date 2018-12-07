@@ -6,13 +6,12 @@
             <span class="badge badge-pill badge-warning tags"> <a v-if="post.approved === null"  href="#" @click.prevent="approvePost(post.id)"><img src="../../assets/png/check-2x.png"></a></span><span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="deletePost(post.id)"> <img src="../../assets/png/delete-2x.png"></a> </span>
             <h2 class="post-title">{{ post.title }}</h2> 
             <a id="popoverButton-sync2" variant="primary"  class="badge badge-pill badge-warning tags" href="#">Add to List</a>
-            <b-popover :show.sync="showList" target="popoverButton-sync2" title="Add To List">
+            <b-popover triggers="click" :show.sync="showList" target="popoverButton-sync2" title="Add To List">
  <select v-model="addList.listid">
       <option v-for="stage in splitJoin(stages.name)"  :value="stage" v-bind:key="stage">
       {{ stage}}
       </option>
     </select>
-<b-form-textarea rows="1" v-model="addList.listid"></b-form-textarea>
 <a href="#" @click.prevent="addToList(addList.listid,post.id,post.title)"> <img src="../../assets/png/check-2x.png"></a>
            </b-popover>
            
@@ -23,7 +22,7 @@
                 <a class="tagright" href="#" @click.prevent="deleteTags(tag)">x</a>
                 </span><a id="popoverButton-sync" variant="primary" @click="showAddTags = true"  class="badge badge-pill badge-warning tags" href="#">add</a>
 
-     <b-popover :show.sync="show" target="popoverButton-sync" title="Add Tags">
+     <b-popover triggers="click blur" :show.sync="show" target="popoverButton-sync" title="Add Tags">
 
                 <div>
      <select v-model="model.tags">

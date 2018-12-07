@@ -7,8 +7,8 @@
             <b-navbar-nav>
                 <!-- <b-nav-item to="/dashboard">Dashboard</b-nav-item> -->
                 <!-- <b-nav-item to="/posts-manager">Feed</b-nav-item> -->
-                <b-nav-item to="/new-post"><img src="../assets/png/plus-2x.png"></b-nav-item>
-                <!-- <b-nav-item href="#" @click.prevent="login" v-if="!activeUser">Login</b-nav-item>
+                <b-nav-item href="#" v-b-modal.modal4><img src="../assets/png/plus-2x.png"></b-nav-item>
+                <!-- <b-nav-item  href="#" @click.prevent="login" v-if="!activeUser">Login</b-nav-item>
           <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item> -->
                 <b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
@@ -36,6 +36,21 @@
                     </router-link>
                 </p>
             </div>
+    </b-modal>
+    <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal4" id="modal4" title="New Post">
+        
+        <form @submit.prevent="savePost">
+          <b-btn class="badge badge-pill badge-warning tags" @click="hideModal3()" type="submit" variant="success"><img src="../assets/png/check-2x.png"></b-btn>
+            <b-form-group>
+
+                <h4>Title: </h4>
+                <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
+                <h4>Summary: </h4>
+                <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
+            </b-form-group>
+
+            <markdown-editor v-model="model.task"></markdown-editor>
+        </form>
     </b-modal>
     <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal3" id="modal3" title="Tags">
             <div class="long" v-for="tag in allTags" v-bind:key="tag.id">
@@ -83,9 +98,13 @@ export default {
         return {
             activeUser: null,
             email: {},
+            model: {},
             posts: [],
             postsapproved: [],
             search: '',
+                    approved: {
+          approved: "1"
+        },
             allTags: {},
         }
     },
@@ -140,6 +159,7 @@ export default {
       this.postsapproved = await api.getApprovalPosts(this.family.familyid)
             this.posts = await api.getPosts(this.family.familyid)
             this.allTags = await api.getTags()
+            this.model = Object.assign({}, this.family, this.approved)
         },
         async updateReadCount(id) {
             await api.updateReadCount(id)
@@ -148,9 +168,36 @@ export default {
         hideModal() {
             this.$refs.modal2.hide()
         },
-                    hideModal() {
+                    hideModalTags() {
             this.$refs.modal3.hide()
+        },
+                            hideModal3() {
+            this.$refs.modal4.hide()
+        },
+      async savePost() {
+        if (this.model.id) {
+          console.log(this.model.tags);
+          await api.updatePost(this.model.id, this.model)
+          if (this.model.tags) {
+            console.log(this.model.tags);
+            if (this.model.tags < 100) {
+              await api.updateTags(this.model.id, this.model)
+            }
+          }
+        } else {
+          //TODO: Fix tags for new posts
+          await api.createPost(this.model)
+          //   if (this.model.tags) {
+          //   console.log(this.model.tags);
+          //   if (this.model.tags < 100) {
+          //     await api.updateTags(this.model.id, this.model)
+          //   }
+          // }
         }
+        this.model = Object.assign({}, this.family, this.approved)
+        await this.refreshPosts()
+      }
+       
     }
 }
 </script>
