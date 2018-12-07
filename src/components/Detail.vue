@@ -5,6 +5,10 @@
             <span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="populatePostToEdit(post)"> <img src="../../assets/png/pencil-2x.png"></a></span>
             <span class="badge badge-pill badge-warning tags"> <a v-if="post.approved === null"  href="#" @click.prevent="approvePost(post.id)"><img src="../../assets/png/check-2x.png"></a></span><span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="deletePost(post.id)"> <img src="../../assets/png/delete-2x.png"></a> </span>
             <h2 class="post-title">{{ post.title }}</h2> 
+            <span v-for="list in listMemberships">
+            <router-link  :to="'/tags/' + list">
+                <span class="badge badge-pill badge-success tags"  v-text="list.listname"></span></router-link>
+            </span>
             <a id="popoverButton-sync2" variant="primary"  class="badge badge-pill badge-warning tags" href="#">Add to List</a>
             <b-popover triggers="click" :show.sync="showList" target="popoverButton-sync2" title="Add To List">
  <select v-model="addList.listid">
@@ -370,6 +374,7 @@ export default {
             reverse: false,
             search: '',
             show: false,
+            listMemberships: {},
             showList: false,
             showPlaces: false,
             stages: {},
@@ -416,6 +421,7 @@ export default {
             this.email = this.account.user.email
             this.family = await api.getFamily(this.email)
             this.allTags = await api.getTags()
+            this.listMemberships = await api.getPostList(this.$route.params.id)
              this.stages = await api.getUserLists(this.family.familyid)
         },
         async updatePost(id) {
@@ -443,6 +449,7 @@ export default {
             await api.createUserListPosts(this.family.familyid,this.addList)
                this.posts = await api.getSinglePost(this.$route.params.id)
                this.allTags = await api.getTags()
+               this.refreshPosts()
         },
         async deleteTags(tag) {
           this.deleteTag.tag = Object.assign(tag)

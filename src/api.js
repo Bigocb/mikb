@@ -41,6 +41,9 @@ export default {
   getSinglePost(id) {
     return this.execute('get', `/task/${id}`)
   },
+  getPostList(id) {
+    return this.execute('get', `/task/list/${id}`)
+  },
   getApprovalPosts(familyid) {
     return this.execute('get', `/approve/tasks/${familyid}`)
   },
