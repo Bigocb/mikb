@@ -14,7 +14,7 @@
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
                 <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
                 <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
-                <h5></h5><b-nav-item  class="badge badge-pill badge-danger bsize" to="/approvals">{{postsapproved.length}}</b-nav-item></h5>
+                <h5></h5><b-nav-item  class="badge badge-pill badge-danger bsize" v-b-modal.modal5>{{postsapproved.length}}</b-nav-item></h5>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -34,6 +34,19 @@
                             </div>
                         </b-card>
                     </router-link>
+                </p>
+            </div>
+    </b-modal>
+    <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal5" id="modal5" title="Queue">
+            <div v-for="post in postsapproved" v-bind:key="post.id">
+                <p>
+                        <b-card class="dash">
+                            <div>
+                                {{post.title}}
+                            </div>
+                             <a href="#" @click.prevent="approve(post.id)"> <img src="../assets/png/check-2x.png"></a>
+                        </b-card>
+            
                 </p>
             </div>
     </b-modal>
@@ -165,6 +178,12 @@ export default {
             await api.updateReadCount(id)
             console.log(id)
         },
+                async approve(id) {
+            await api.approvePost(id)
+            this.refreshPosts()
+            this.hideModal4()
+
+        },
         hideModal() {
             this.$refs.modal2.hide()
         },
@@ -173,6 +192,9 @@ export default {
         },
                             hideModal3() {
             this.$refs.modal4.hide()
+        },
+        hideModal4() {
+            this.$refs.modal5.hide()
         },
       async savePost() {
         if (this.model.id) {
