@@ -8,6 +8,7 @@
             <span v-for="list in listMemberships">
             <router-link  :to="'/tags/' + list">
                 <span class="badge badge-pill badge-success tags"  v-text="list.listname"></span></router-link>
+                <a href="#" class="tagright" @click.prevent="deleteListPost(post.id, list.listname)">x</a>
             </span>
             <a id="popoverButton-sync2" variant="primary"  class="badge badge-pill badge-warning tags" href="#">Add to List</a>
             <b-popover triggers="click" :show.sync="showList" target="popoverButton-sync2" title="Add To List">
@@ -376,6 +377,7 @@ export default {
             show: false,
             listMemberships: {},
             showList: false,
+            deleteFromList: {},
             showPlaces: false,
             stages: {},
             addList:{},
@@ -440,6 +442,12 @@ export default {
                this.posts = await api.getSinglePost(this.$route.params.id)
                this.allTags = await api.getTags()
         },
+            async deleteListPost(postid,listid) {
+        this.deleteFromList.postid = Object.assign(postid)
+        this.deleteFromList.listid = Object.assign(listid)
+        await api.deleteUserListPosts(this.family.familyid, this.deleteFromList)
+               this.refreshPosts()
+      },
         async addToList(listid,postid,title) {
             console.log(this.addList)
             this.addList.listid = listid
