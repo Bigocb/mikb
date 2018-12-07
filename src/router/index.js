@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import PostsManager from '@/components/PostsManager'
 import NewPost from '@/components/NewPost'
-import Dashboard from '@/components/Dashboard'
+import Front from '@/components/Front'
 import Detail from '@/components/Detail'
 import list from '@/components/list'
 import Tags from '@/components/Tags'
@@ -18,8 +18,8 @@ let router = new Router({
   mode: 'history',
   routes: [{
       path: '/',
-      name: 'Dashboard',
-      component: Dashboard
+      name: 'Front',
+      component: Front
     },
     {
       path: '/posts-manager',
