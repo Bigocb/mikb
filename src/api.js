@@ -113,6 +113,9 @@ export default {
   getTags() {
     return this.execute('get', `/tags`)
   },
+  getTopTags() {
+    return this.execute('get', `/top/tags`)
+  },
   deletePost(id) {
     return this.execute('delete', `/task/${id}`)
   }

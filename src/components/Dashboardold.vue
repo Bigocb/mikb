@@ -1,63 +1,426 @@
 <template>
       <b-container class="container">
         <b-row class="row">
-          <b-col >
-             <b-card class="dash">
-              <h3>Last Few Adds</h3>
-              </b-card>
-              <div v-for="post in postsnew"  v-bind:key="post.id">
-                <div>
-                  <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
-                    <b-card class="dash">
-                      <div>
-                        <h4>{{post.title}}</h4>
-                        <p>{{post.summary}}</p>
-                      </div>
-                    </b-card>
-                  </router-link>
-                </div>
-
-              </div>
-          </b-col>
-          <b-col>
-          <b-row>
-             <div >
+          <b-col v-if="userPrefs.selectedLeft === 'frequent'">
             <b-card class="dash">
-              <h3>Top Tags</h3>
-           
-              </b-card>
-                  <div class="long" v-for="tag in toptags" v-bind:key="tag.tagid">
-                    <router-link v-on:click.native="hideModalTags()" :to="'/tags/' + tag.tag">
-                        <b-card class="badge badge-success label">
-                            <div>
-                                {{tag.tag}}
-                            </div>
-                        </b-card>
-                    </router-link>
+              <h3>Frequent Reas</h3>
+            </b-card>
+            <draggable v-model="myArray">
+    <transition-group>
+            <div  v-for="post in postsjava"  v-bind:key="post.id">
+              <p>
+                <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+                  <b-card class="dash">
+                    <div >
+                      {{post.title}}
+                    </div>
+                  </b-card>
+                </router-link>           
+              </p>
+            </div>
+    </transition-group>
+    </draggable>
 
-   </div>
-              </div>
-          </b-row>
-          <b-row>
-                     <b-card class="dash">
-              <h3>Last Few Adds</h3>
-              </b-card>
-              <div v-for="post in poststoread"  v-bind:key="post.id">
-                <div>
-                  <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
-                    <b-card class="dash">
-                      <div>
-                        <h4>{{post.title}}</h4>
-                        <p>{{post.summary}}</p>
-                      </div>
-                    </b-card>
-                  </router-link>
-                </div>
-
-              </div>
-          </b-row>
           </b-col>
-</b-row>
+          <b-col v-if="userPrefs.selectedLeft === 'approvals'">
+             <b-card class="dash">
+            <h3>Need Approval</h3>
+             </b-card>
+            <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+
+                    <b-col v-if="userPrefs.selectedLeft === 'todo'">
+             <b-card class="dash">
+            <h3>To Dos</h3>
+             </b-card>
+            <div v-for="post in poststodo"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedLeft === 'toread'">
+             <b-card class="dash">
+            <h3>To Read</h3>
+             </b-card>
+            <div v-for="post in poststoread"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedLeft === 'archive'">
+             <b-card class="dash">
+            <h3>Archived</h3>
+             </b-card>
+            <div v-for="post in postsarchive"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+          <b-col v-if="userPrefs.selectedLeft === 'recent'">
+             <b-card class="dash">
+              <h3>Recent Posts</h3>
+                </b-card>
+              <div v-for="post in postsnew"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+
+                   <b-col v-if="userPrefs.selectedRightMid === 'todo'">
+             <b-card class="dash">
+            <h3>To Dos</h3>
+             </b-card>
+            <div v-for="post in poststodo"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedRightMid === 'toread'">
+             <b-card class="dash">
+            <h3>To Read</h3>
+             </b-card>
+            <div v-for="post in poststoread"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedRightMid === 'archive'">
+             <b-card class="dash">
+            <h3>Archived</h3>
+             </b-card>
+            <div v-for="post in postsarchive"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+
+          <b-col v-if="userPrefs.selectedRightMid === 'frequent'">
+            <b-card class="dash">
+            <h3>Frequent Reads</h3>
+             </b-card>
+              <div v-for="post in postsjava"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+          <b-col v-if="userPrefs.selectedRightMid === 'recent'">
+              <b-card class="dash">
+              <h3>Recent Posts</h3>
+                </b-card>
+            <div v-for="post in postsnew"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col> 
+          <b-col v-if="userPrefs.selectedRightMid === 'approvals'">
+            <b-card class="dash">
+            <h3>Need Approval</h3>
+             </b-card>
+              <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+          <b-col v-if="userPrefs.selectedLeftMid === 'frequent'">
+            <b-card class="dash">
+             <h3>Frequent Reads</h3>
+             </b-card>
+              <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+
+               <b-col v-if="userPrefs.selectedLeftMid === 'todo'">
+             <b-card class="dash">
+            <h3>To Dos</h3>
+             </b-card>
+            <div v-for="post in poststodo"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedLeftMid === 'toread'">
+             <b-card class="dash">
+            <h3>To Read</h3>
+             </b-card>
+            <div v-for="post in poststoread"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedLeftMid === 'archive'">
+             <b-card class="dash">
+            <h3>Archived</h3>
+             </b-card>
+            <div v-for="post in postsarchive"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+
+
+          <b-col v-if="userPrefs.selectedLeftMid === 'approvals'">
+            <b-card class="dash">
+            <h3>Need Approval</h3>
+             </b-card>
+              <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedLeftMid === 'recent'">
+            <b-card class="dash">
+            <h3>Recent Posts</h3>
+             </b-card>
+              <div v-for="post in postsnew"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+
+     <b-col v-if="userPrefs.selectedRight === 'todo'">
+             <b-card class="dash">
+            <h3>To Dos</h3>
+             </b-card>
+            <div v-for="post in poststodo"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedRight === 'toread'">
+             <b-card class="dash">
+            <h3>To Read</h3>
+             </b-card>
+            <div v-for="post in poststoread"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedRight === 'archive'">
+             <b-card class="dash">
+            <h3>Archived</h3>
+             </b-card>
+            <div v-for="post in postsarchive"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+            </div>
+          </b-col>
+
+
+<b-col v-if="userPrefs.selectedRight === 'frequent'">
+            <b-card class="dash">
+             <h3>Frequent Reads</h3>
+             </b-card>
+              <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+          <b-col v-if="userPrefs.selectedRight === 'approvals'">
+            <b-card class="dash">
+            <h3>Need Approval</h3>
+             </b-card>
+              <div v-for="post in postsapproved"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+                    <b-col v-if="userPrefs.selectedRight === 'recent'">
+            <b-card class="dash">
+            <h3>Recent Posts</h3>
+             </b-card>
+              <div v-for="post in postsnew"  v-bind:key="post.id">
+ <p ><router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
+               <b-card class="dash">
+                <div >
+                {{post.title}}
+            </div>
+           </b-card>
+           </router-link>           </p>
+              </div>
+          </b-col>
+
+          
+        </b-row>
+
+        <div class="dash">
+        <div class="navbar navbar-expand-lg navbar-dark bg-primary" >
+      <a id="popoverButton-sync" > <img src="../../assets/png/wrench-2x.png"></a>
+      </div>
+      </div>
+
+      <b-popover :show.sync="show" target="popoverButton-sync" title="Add Tags">
+      <b-card no-body class="mb-1">
+        <b-card-header header-tag="header" class="p-1" role="tab">
+          <b-btn block href="#" v-b-toggle.accordion1 variant="info">Left</b-btn>
+        </b-card-header>
+        <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <b-form-group>
+              <b-form-radio-group id="radios1" v-model="userPrefs.selectedLeft" :options="options" name="radioOpenions1">
+              </b-form-radio-group>
+            </b-form-group>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+      <b-card no-body class="mb-1">
+        <b-card-header header-tag="header" class="p-1" role="tab">
+          <b-btn block href="#" v-b-toggle.accordion2 variant="info">Right Mid</b-btn>
+        </b-card-header>
+        <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <b-form-group>
+              <b-form-radio-group id="radios2" v-model="userPrefs.selectedLeftMid" :options="options" name="radioOpenions2">
+              </b-form-radio-group>
+            </b-form-group>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+      <b-card no-body class="mb-1">
+        <b-card-header header-tag="header" class="p-1" role="tab">
+          <b-btn block href="#" v-b-toggle.accordion3 variant="info">Left Mid</b-btn>
+        </b-card-header>
+        <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <b-form-group>
+              <b-form-radio-group id="radios3" v-model="userPrefs.selectedRightMid" :options="options" name="radioOpenions3">
+              </b-form-radio-group>
+            </b-form-group>
+          </b-card-body>
+        </b-collapse>
+         </b-card>
+              <b-card no-body class="mb-1">
+        <b-card-header header-tag="header" class="p-1" role="tab">
+          <b-btn block href="#" v-b-toggle.accordion4 variant="info">Right </b-btn>
+        </b-card-header>
+                <b-collapse id="accordion4" accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <b-form-group>
+              <b-form-radio-group id="radios4" v-model="userPrefs.selectedRight" :options="options" name="radioOpenions3">
+              </b-form-radio-group>
+            </b-form-group>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+      
+      
+      <a href="#"  @click.prevent="setPrefs()"> <img src="../../assets/png/file-2x.png"></a>
+
+ </b-popover>
   </b-container>
 </template>
 <style>
@@ -367,14 +730,10 @@ img {
   }
   
 .long {
-    column-count: 3;
-     -webkit-column-count: 3; /* Chrome, Safari, Opera */
-    -moz-column-count: 3; /* Firefox */
-    column-count: 3;
-    column-rule: 5px;
-    column-gap: 40px;
-    column-width: 300px;
+  width: 25%;
+  float: left;
 }
+
 .short {
   width: 65%;
   float: right;
@@ -593,7 +952,6 @@ img {
         user:{},
         loading: false,
         postsjava: [],
-        toptags: [],
         postsapproved: [],
         postsnew: [],
         poststoread: [],
@@ -677,7 +1035,6 @@ img {
         this.userPrefs = await api.getPrefs(this.family.familyid)
         this.poststodo = await api.getToDos(this.family.familyid)
         this.poststoread = await api.getToRead(this.family.familyid)
-        this.toptags = await api.getTopTags()
         console.log(this.poststoread)
         this.postsarchive = await api.getArchived(this.family.familyid)
       },

@@ -69,7 +69,9 @@
                 <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
             </b-form-group>
 
-            <markdown-editor v-model="model.task"></markdown-editor>
+
+
+            <wysiwyg v-model="model.task" />
         </form>
         
     </div>
@@ -364,9 +366,14 @@ hljs.initHighlightingOnLoad();
 
 import api from '@/api'
 import VueHighlightJS from 'vue-highlightjs'
+import { Editor, EditorContent } from 'tiptap'
 import hljs from 'highlight.js'
   import { mapState, mapActions } from "vuex";
+   import markdownEditor from 'vue-simplemde/src/markdown-editor'
+
+  
 export default {
+
     data() {
 
         return {
@@ -382,6 +389,16 @@ export default {
             stages: {},
             addList:{},
             addLToist:{},
+                    configs: {
+          spellChecker: false,
+          promptURLs: true,
+          	autofocus: true,
+	autosave: {
+		enabled: true,
+		uniqueId: "MyUniqueID",
+		delay: 1000,
+	}
+        },
             showAddTags: false,
             showTags: false,
             loading: false,

@@ -51,18 +51,37 @@
             </div>
     </b-modal>
     <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal4" id="modal4" title="New Post">
-        
-        <form @submit.prevent="savePost">
-          <b-btn class="badge badge-pill badge-warning tags" @click="hideModal3()" type="submit" variant="success"><img src="../assets/png/check-2x.png"></b-btn>
-            <b-form-group>
+        <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
+     <b-popover triggers="click" :show.sync="show" target="popoverButton-sync" title="Add Tags">
 
+                <div>
+     <select v-model="model.tags">
+      <option v-for="tag in allTags"  :value="tag.id" v-bind:key="tag.id">
+      {{ tag.tag }}
+      </option>
+    </select>
+      <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
+     <a href="#" @click.prevent="addTags(newTag.tag)"> <img src="../assets/png/check-2x.png"></a>
+    <a class="tagright" href="#" @click.prevent="savetag()">save</a>
+     <a class="tagright" href="#" @click="showAddTags = false">close</a>
+                </div>
+                  </b-popover>
+        <form @submit.prevent="savePost">
+          <b-btn class="badge badge-pill badge-warning tags" type="submit" variant="success"><img src="../assets/png/check-2x.png"></b-btn>
+            <b-form-group>
+               <span v-for="tag in splitJoin(model.tags)">
+                
+            <router-link  :to="'/tags/' + tag">
+                <span class="badge badge-pill badge-success tags"  v-text="tag"></span></router-link>
+                <a class="tagright" href="#" @click.prevent="deleteTags(tag)">x</a>
+                </span>
                 <h4>Title: </h4>
                 <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
                 <h4>Summary: </h4>
                 <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
             </b-form-group>
 
-            <markdown-editor v-model="model.task"></markdown-editor>
+           <wysiwyg v-model="model.task" />
         </form>
     </b-modal>
     <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal3" id="modal3" title="Tags">
@@ -79,7 +98,14 @@
 </div>
 </template>
 <style>
+    .h-tooltip {
+   z-index: 99999!important;
+}
+.popover{
+    z-index:100000000;
+}
 .label {
+
   white-space: nowrap;
       margin-right:5px;
            margin-left:5px;
@@ -111,6 +137,12 @@ export default {
         return {
             activeUser: null,
             email: {},
+                        allTags: {},
+                                    showAddTags: false,
+            showTags: false,
+             show: false,
+                        removeTags: {},
+            newTag: {},
             model: {},
             posts: [],
             postsapproved: [],
@@ -184,6 +216,14 @@ export default {
             this.hideModal4()
 
         },
+                splitJoin(theText) {
+            if (theText) {
+                return theText.split(',');
+            } else {
+                return null;
+            }
+
+        },
         hideModal() {
             this.$refs.modal2.hide()
         },
@@ -207,17 +247,8 @@ export default {
             }
           }
         } else {
-          //TODO: Fix tags for new posts
-          await api.createPost(this.model)
-          //   if (this.model.tags) {
-          //   console.log(this.model.tags);
-          //   if (this.model.tags < 100) {
-          //     await api.updateTags(this.model.id, this.model)
-          //   }
-          // }
+          await api.createPost(this.model).then(response => (this.model = response[0]))
         }
-        this.model = Object.assign({}, this.family, this.approved)
-        await this.refreshPosts()
       }
        
     }
