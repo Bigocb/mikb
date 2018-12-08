@@ -69,7 +69,7 @@
     </select>
       <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
      <a href="#" @click.prevent="addTags(newTag.tag)"> <img src="../assets/png/check-2x.png"></a>
-    <a class="tagright" href="#" @click.prevent="savetag(model.id)">save</a>
+    <a class="tagright" href="#" @click.prevent="savetag()">save</a>
      <a class="tagright" href="#" @click="showAddTags = false">close</a>
                 </div>
                   </b-popover>
@@ -218,8 +218,8 @@ export default {
             await api.updateReadCount(id)
             console.log(id)
         },
-                async savetag(id) {
-          await api.updateTags(id, this.model)
+                async savetag() {
+          await api.updateTags(this.model.id, this.model)
           this.show = false
         },
                 async approve(id) {
