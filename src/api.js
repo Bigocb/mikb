@@ -12,9 +12,11 @@ export default {
     return client({
       method,
       url: resource,
+      mode: 'no-cors',
       data,
       headers: {
-        //     Authorization: `Bearer ${accessToken}`
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
       }
     }).then(req => {
       return req.data
