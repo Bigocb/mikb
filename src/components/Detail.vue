@@ -67,7 +67,7 @@
             <b-form-group>
 
                 <h4>Title: </h4>
-                <div class="alert-light">
+                <div class="bg-light">
                         <quill-editor class="editor-example bubble"
                       ref="myTextEditor"
                       v-model="model.title"
@@ -79,7 +79,7 @@
         
                 </div>
                 <h4>Summary: </h4>
-                         <div class="alert-light">  
+                         <div class="bg-light">  
                                                 <quill-editor class="editor-example bubble"
                       ref="myTextEditor"
                       v-model="model.summary"
