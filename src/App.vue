@@ -310,6 +310,7 @@ export default {
             console.log(id)
         },
                 async savetag() {
+                    console.log(this.model)
           await api.updateTags(this.model.id, this.model)
           this.show = false
         },
