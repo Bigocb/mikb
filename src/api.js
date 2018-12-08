@@ -12,7 +12,6 @@ export default {
     return client({
       method,
       url: resource,
-      mode: 'no-cors',
       data,
       headers: {
         'Access-Control-Allow-Origin': '*',
