@@ -227,6 +227,7 @@ export default {
                         removeTags: {},
             newTag: {},
             model: {},
+            summary: {},
             posts: [],
             postsapproved: [],
             search: '',
@@ -298,7 +299,7 @@ export default {
       this.postsapproved = await api.getApprovalPosts(this.family.familyid)
             this.posts = await api.getPosts(this.family.familyid)
             this.allTags = await api.getTags()
-            this.model = Object.assign({}, this.family, this.approved)
+            this.model = Object.assign({}, this.family, this.approved,this.summary)
         },
         async updateReadCount(id) {
             await api.updateReadCount(id)
@@ -346,6 +347,7 @@ export default {
           }
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
+          
         }
       }
        
