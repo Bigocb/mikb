@@ -67,10 +67,13 @@
             <b-form-group>
 
                 <h4>Title: </h4>
+                <div class="alert-light">
                 <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
+                </div>
                 <h4>Summary: </h4>
-                           
+                         <div class="alert-light">  
                 <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
+                </div>
             </b-form-group>
 
 
