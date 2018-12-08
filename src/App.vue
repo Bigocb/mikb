@@ -323,6 +323,7 @@ export default {
 
         },
                 splitJoin(theText) {
+                    console.log(theText)
             if (theText) {
                 return theText.split(',');
             } else {
