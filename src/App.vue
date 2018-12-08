@@ -202,6 +202,22 @@ export default {
             }
           }
             },
+                         editorOption2: {
+          theme: 'bubble',
+          placeholder: "输入任何内容，支持html",
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              [{ 'color': [] }, { 'background': [] }],
+              [{ 'font': [] }],
+              [{ 'align': [] }],
+              ['link', 'image'],
+              ['clean']
+            ]
+          }
+             },
             activeUser: null,
             email: {},
                         allTags: {},
