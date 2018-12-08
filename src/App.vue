@@ -54,7 +54,7 @@
     <span v-if="!model.id">Not Saved</span>
           <span v-else>
           <div>saved</div>
-
+{{model}}
           </span>
             <span v-for="tag in splitJoin(model.tags)">
                 
