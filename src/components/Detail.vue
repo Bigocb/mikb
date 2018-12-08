@@ -53,6 +53,7 @@
                 
         </div>
     </div>
+    
     <div class="dash" v-if="showPlaces == true">
         <div>
 
