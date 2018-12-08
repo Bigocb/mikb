@@ -76,20 +76,41 @@
         <form @submit.prevent="savePost">
 
           <b-btn class="badge badge-pill badge-warning tags" type="submit" variant="success"><img src="../assets/png/check-2x.png"></b-btn>
-            <b-form-group>
-               <span v-for="tag in splitJoin(model.tags)">
-                
-            <router-link  :to="'/tags/' + tag">
-                <span class="badge badge-pill badge-success tags"  v-text="tag"></span></router-link>
-                <a class="tagright" href="#" @click.prevent="deleteTags(tag)">x</a>
-                </span>
-                <h4>Title: </h4>
-                <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
-                <h4>Summary: </h4>
-                <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
-            </b-form-group>
+           <b-form-group>
 
-           <wysiwyg v-model="model.task" />
+                <h4>Title: </h4>
+                <div class="bg-light titles">
+                        <quill-editor class="editor-example bubble"
+                      ref="myTextEditor"
+                      v-model="model.title"
+                      :options="editorOption2"
+                            @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+        
+                </div>
+                <h4>Summary: </h4>
+                         <div class="bg-light titles">  
+                                                <quill-editor class="editor-example bubble"
+                      ref="myTextEditor"
+                      v-model="model.summary"
+                      :options="editorOption2"
+                            @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+                </div>
+            </b-form-group>
+            <div class="quill-editor alert-light">
+                    <quill-editor ref="myTextEditor"
+                      v-model="model.task"
+                      :options="editorOption"
+                      @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+          </div>
         </form>
     </b-modal>
     <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal3" id="modal3" title="Tags">
@@ -111,6 +132,14 @@
 }
 .popover{
     z-index:100000000;
+}
+ .quill-editor,
+  .quill-code {
+min-height:300px;
+  }
+
+  .titles {
+  height: 100px;
 }
 .label {
 
@@ -138,11 +167,41 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import api from '@/api'
-export default {
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
+import { quillEditor } from 'vue-quill-editor'
+export default {
+  components: {
+    quillEditor
+  },
     name: 'app',
     data() {
         return {
+                    editorOption: {
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{ 'header': 1 }, { 'header': 2 }],
+              [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+              [{ 'script': 'sub' }, { 'script': 'super' }],
+              [{ 'indent': '-1' }, { 'indent': '+1' }],
+              [{ 'direction': 'rtl' }],
+              [{ 'size': ['small', false, 'large', 'huge'] }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              [{ 'font': [] }],
+              [{ 'color': [] }, { 'background': [] }],
+              [{ 'align': [] }],
+              ['clean'],
+              ['link', 'image', 'video']
+            ],
+            syntax: {
+              highlight: text => hljs.highlightAuto(text).value
+            }
+          }
+            },
             activeUser: null,
             email: {},
                         allTags: {},
@@ -205,7 +264,18 @@ export default {
             this.refreshPosts()
     },
     methods: {
-
+        editor() {
+        return this.$refs.myTextEditor.quill
+      },
+            onEditorBlur(editor) {
+        console.log('editor blur!', editor)
+      },
+      onEditorFocus(editor) {
+        console.log('editor focus!', editor)
+      },
+      onEditorReady(editor) {
+        console.log('editor ready!', editor)
+      },
         async refreshPosts() {
       this.email = this.account.user.email
       this.family = await api.getFamily(this.email)
