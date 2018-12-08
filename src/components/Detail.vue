@@ -4,7 +4,7 @@
         <div v-for="post in posts" v-bind:key="post.id">
             <span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="populatePostToEdit(post)"> <img src="../../assets/png/pencil-2x.png"></a></span>
             <span class="badge badge-pill badge-warning tags"> <a v-if="post.approved === null"  href="#" @click.prevent="approvePost(post.id)"><img src="../../assets/png/check-2x.png"></a></span><span class="badge badge-pill badge-warning tags"><a href="#" @click.prevent="deletePost(post.id)"> <img src="../../assets/png/delete-2x.png"></a> </span>
-            <h2 class="post-title" v-html="post.title></h2> 
+            <h2 class="post-title" v-html="post.title"></h2> 
             <span v-for="list in listMemberships">
             <router-link  :to="'/tags/' + list">
                 <span class="badge badge-pill badge-success tags"  v-text="list.listname"></span></router-link>
