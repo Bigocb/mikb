@@ -227,7 +227,11 @@ export default {
                         removeTags: {},
             newTag: {},
             model: {},
-            summary: {},
+            summary: {
+                summary: ""
+
+                
+            },
             posts: [],
             postsapproved: [],
             search: '',
