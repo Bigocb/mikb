@@ -67,7 +67,7 @@
             <b-form-group>
 
                 <h4>Title: </h4>
-                <div class="bg-light">
+                <div class="bg-light titles">
                         <quill-editor class="editor-example bubble"
                       ref="myTextEditor"
                       v-model="model.title"
@@ -125,6 +125,10 @@
   .quill-code {
 min-height:300px;
   }
+
+  .titles {
+  height: 200px;
+}
 
 .tags {
     margin-right: 8px;
