@@ -56,10 +56,7 @@
           <div>saved</div>
 {{model}}
           </span>
-            <span v-for="tag in splitJoin(model.tags)">
-                
-            <router-link  :to="'/tags/' + tag">
-                <span class="badge badge-pill badge-success tags"  v-text="tag"></span></router-link></span>
+
           <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
 
         
@@ -349,7 +346,6 @@ export default {
         if (this.model.id) {
           console.log(this.model.tags);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
-          console.log(response)
           console.log(this.model)
           if (this.model.tags) {
             console.log(this.model.tags);
