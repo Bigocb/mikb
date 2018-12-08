@@ -79,7 +79,7 @@
         
                 </div>
                 <h4>Summary: </h4>
-                         <div class="bg-light">  
+                         <div class="bg-light titles">  
                                                 <quill-editor class="editor-example bubble"
                       ref="myTextEditor"
                       v-model="model.summary"
@@ -127,7 +127,7 @@ min-height:300px;
   }
 
   .titles {
-  height: 200px;
+  height: 100px;
 }
 
 .tags {
