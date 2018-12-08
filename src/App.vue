@@ -228,7 +228,7 @@ export default {
             newTag: {},
             model: {},
             summary: {
-                summary: ""
+                summary: "None"
 
                 
             },
