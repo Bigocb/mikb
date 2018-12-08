@@ -349,6 +349,8 @@ export default {
         if (this.model.id) {
           console.log(this.model.tags);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
+          console.log(response)
+          console.log(this.model)
           if (this.model.tags) {
             console.log(this.model.tags);
             if (this.model.tags < 100) {
