@@ -68,11 +68,26 @@
 
                 <h4>Title: </h4>
                 <div class="alert-light">
-                <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
+                        <quill-editor class="editor-example bubble"
+                      ref="myTextEditor"
+                      v-model="model.title"
+                      :options="editorOption2"
+                            @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+        
                 </div>
                 <h4>Summary: </h4>
                          <div class="alert-light">  
-                <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
+                                                <quill-editor class="editor-example bubble"
+                      ref="myTextEditor"
+                      v-model="model.summary"
+                      :options="editorOption2"
+                            @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
                 </div>
             </b-form-group>
 
