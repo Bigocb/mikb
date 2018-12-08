@@ -1,60 +1,57 @@
 <template>
-      <b-container class="container">
+      <b-container fluid class="container">
         <b-row class="row">
-          <b-col >
-             <b-card class="dash">
+          <b-col cols="8">
+             <div class="dash">
               <h3>Last Few Adds</h3>
-              </b-card>
+              </div>
               <div v-for="post in postsnew"  v-bind:key="post.id">
                 <div>
+                  <b-card class="dash">
                   <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
-                    <b-card class="dash">
+                  
                       <div>
                         <h4>{{post.title}}</h4>
+</div>
+</router-link>
+<div>
                         <p>{{post.summary}}</p>
                       </div>
+                        
+                      <div>
+                      <h6>{{post.lastupdate}}</h6>
+                      </div>
                     </b-card>
-                  </router-link>
+                
                 </div>
 
               </div>
           </b-col>
-          <b-col>
+
+          <b-col cols="4">
           <b-row>
-             <div >
-            <b-card class="dash">
+
+            <div class="dash">
               <h3>Top Tags</h3>
            
-              </b-card>
-                  <div class="long" v-for="tag in toptags" v-bind:key="tag.tagid">
-                    <router-link v-on:click.native="hideModalTags()" :to="'/tags/' + tag.tag">
-                        <b-card class="badge badge-success label">
-                            <div>
-                                {{tag.tag}}
-                            </div>
-                        </b-card>
-                    </router-link>
+</div>
 
-   </div>
-              </div>
+          <wordcloud
+      :data="toptags"
+      nameKey="tag"
+      valueKey="count"
+      :color="myColors"
+      :wordClick="wordClickHandler">
+      </wordcloud>
+
           </b-row>
           <b-row>
                      <b-card class="dash">
               <h3>Last Few Adds</h3>
               </b-card>
-              <div v-for="post in poststoread"  v-bind:key="post.id">
-                <div>
-                  <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
-                    <b-card class="dash">
-                      <div>
-                        <h4>{{post.title}}</h4>
-                        <p>{{post.summary}}</p>
-                      </div>
-                    </b-card>
-                  </router-link>
-                </div>
 
-              </div>
+
+    
           </b-row>
           </b-col>
 </b-row>
@@ -148,6 +145,7 @@ img {
 
     .dash{
       margin-top: 20px;
+      border-bottom: 1px solid;
     }
 
         .timeline-centered .timeline-entry:before, .timeline-centered .timeline-entry:after {
@@ -551,7 +549,9 @@ img {
   .icon--ei-sc-pinterest {
     fill: #bd081c
   }
-  
+  .wordc{
+    min-width: 300px;
+  }
   .icon--ei-sc-telegram {
     fill: #08c
   }
@@ -572,6 +572,7 @@ img {
 
 <script>
   import api from '@/api'
+  import wordcloud from 'vue-wordcloud'
   import VueHighlightJS from 'vue-highlightjs'
   import store from '../_store'
   import hljs from 'highlight.js'
@@ -580,6 +581,7 @@ img {
   export default {
      components: {
             draggable,
+            wordcloud
         },
     data() {
   
@@ -588,6 +590,7 @@ img {
         columns: ['more','title','category','delete'],
         reverse: false,
         search: '',
+        myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
         showPlaces: false,
         email: {},
         user:{},
@@ -598,6 +601,7 @@ img {
         postsnew: [],
         poststoread: [],
         poststodo: [],
+        fontSize: [10, 80],
         postsarchive: [],
         allTags: {},
         userPrefs: {},
@@ -668,6 +672,9 @@ img {
         this.sortKey = key
         this.sortOrders[key] = this.sortOrders[key] * -1
       },
+          wordClickHandler(tag, count, vm) {
+      console.log('wordClickHandler', tag, count, vm);
+    },
       async refreshPosts() {
         this.email = this.account.user.email
         this.family = await api.getFamily(this.email)
