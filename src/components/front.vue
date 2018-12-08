@@ -33,10 +33,8 @@
 
             <div class="dash">
               <h3>Top Tags</h3>
-           
 </div>
-
-          <wordcloud
+          <wordcloud class="card dash"
       :data="toptags"
       nameKey="tag"
       valueKey="count"
@@ -46,13 +44,11 @@
 
           </b-row>
           <b-row>
-                     <b-card class="dash">
-              <h3>Last Few Adds</h3>
-              </b-card>
-
-
-    
+                      <div class="dash">
+              <h3>Placeholder</h3>
+</div>
           </b-row>
+
           </b-col>
 </b-row>
   </b-container>
