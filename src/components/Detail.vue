@@ -43,10 +43,12 @@
                   </b-popover>
             <p class="text-success">{{post.lastupdate}} </p>
             <div class="alert alert-dismissible alert-secondary">
-                <p class="summary">{{post.summary}}</p>
+  
+                
+                <p class="summary" v-html="post.summary"></p>
             </div>
             <div class="alert alert-dismissible alert-secondary">
-                <p @dblclick="showPlaces = true"v-highlightjs class="post-content" v-html="marked(post.task)"></p>
+                <p @dblclick="showPlaces = true" class="post-content" v-html="post.task"></p>
             </div>
                 
         </div>
@@ -66,15 +68,24 @@
                 <h4>Title: </h4>
                 <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
                 <h4>Summary: </h4>
+                           
                 <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
             </b-form-group>
 
 
 
-            <wysiwyg v-model="model.task" />
+
+<div class="quill-editor">
+                    <quill-editor ref="myTextEditor"
+                      v-model="model.task"
+                      :options="editorOption"
+                      @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
+        </div>
         </form>
-        
-    </div>
+        </div>
     </div>
 </article>
 </template>
@@ -90,6 +101,11 @@
     width: 95%;
     margin: 0 auto;
 }
+
+ .quill-editor,
+  .quill-code {
+min-height:300px;
+  }
 
 .tags {
     margin-right: 8px;
@@ -363,7 +379,11 @@ hljs.initHighlightingOnLoad();
 </script>
 
 <script>
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
+import { quillEditor } from 'vue-quill-editor'
 import api from '@/api'
 import VueHighlightJS from 'vue-highlightjs'
 import { Editor, EditorContent } from 'tiptap'
@@ -373,10 +393,35 @@ import hljs from 'highlight.js'
 
   
 export default {
-
+  components: {
+    quillEditor
+  },
     data() {
 
         return {
+            editorOption: {
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{ 'header': 1 }, { 'header': 2 }],
+              [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+              [{ 'script': 'sub' }, { 'script': 'super' }],
+              [{ 'indent': '-1' }, { 'indent': '+1' }],
+              [{ 'direction': 'rtl' }],
+              [{ 'size': ['small', false, 'large', 'huge'] }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              [{ 'font': [] }],
+              [{ 'color': [] }, { 'background': [] }],
+              [{ 'align': [] }],
+              ['clean'],
+              ['link', 'image', 'video']
+            ],
+            syntax: {
+              highlight: text => hljs.highlightAuto(text).value
+            }
+          }
+            },
             sortKey: '',
             columns: ['more', 'title', 'category', 'delete'],
             reverse: false,
@@ -413,7 +458,23 @@ export default {
             approved: {
                 approved: "1"
             },
-            selectedPlace: {}
+            selectedPlace: {},
+             editorOption2: {
+          theme: 'bubble',
+          placeholder: "输入任何内容，支持html",
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              [{ 'color': [] }, { 'background': [] }],
+              [{ 'font': [] }],
+              [{ 'align': [] }],
+              ['link', 'image'],
+              ['clean']
+            ]
+          }
+             }
         }
     },
     async created() {
@@ -428,13 +489,28 @@ export default {
     ...mapState({
       account: state => state.account,
       users: state => state.users.all
-    })
+    }),
+          editor() {
+        return this.$refs.myTextEditor.quill
+      },
+      contentCode() {
+        return hljs.highlightAuto(this.content).value
+      }
   },
     methods: {
         sortBy: function (key) {
             this.sortKey = key
             this.sortOrders[key] = this.sortOrders[key] * -1
         },
+      onEditorBlur(editor) {
+        console.log('editor blur!', editor)
+      },
+      onEditorFocus(editor) {
+        console.log('editor focus!', editor)
+      },
+      onEditorReady(editor) {
+        console.log('editor ready!', editor)
+      },
         async refreshPosts() {
             this.posts = await api.getSinglePost(this.$route.params.id)
             this.email = this.account.user.email
