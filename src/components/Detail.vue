@@ -53,7 +53,7 @@
                 
         </div>
     </div>
-    
+
     <div class="dash" v-if="showPlaces == true">
         <div>
 
@@ -76,7 +76,7 @@
 
 
 
-<div class="quill-editor">
+<div class="quill-editor alert-light">
                     <quill-editor ref="myTextEditor"
                       v-model="model.task"
                       :options="editorOption"
