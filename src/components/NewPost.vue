@@ -6,15 +6,16 @@
 
 
         <form @submit.prevent="savePost">
+        test
+                  <span v-if="!model.id">Not Saved</span>
+          <span v-else>saved</span>
           <b-btn class="badge badge-pill badge-warning tags" @click="showPlaces = false" type="submit" variant="success"><img src="../../assets/png/check-2x.png"></b-btn>
             <b-form-group>
-
                 <h4>Title: </h4>
                 <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
                 <h4>Summary: </h4>
                 <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
             </b-form-group>
-
             <markdown-editor v-model="model.task"></markdown-editor>
         </form>
 

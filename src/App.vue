@@ -51,9 +51,15 @@
             </div>
     </b-modal>
     <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal4" id="modal4" title="New Post">
-        <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
+    <span v-if="!model.id">Not Saved</span>
+          <span v-else>
+          <div>saved</div>
+          <div>
+          <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
+          </div>
+          </span>
+        
      <b-popover triggers="click" :show.sync="show" target="popoverButton-sync" title="Add Tags">
-
                 <div>
      <select v-model="model.tags">
       <option v-for="tag in allTags"  :value="tag.id" v-bind:key="tag.id">
@@ -62,11 +68,12 @@
     </select>
       <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
      <a href="#" @click.prevent="addTags(newTag.tag)"> <img src="../assets/png/check-2x.png"></a>
-    <a class="tagright" href="#" @click.prevent="savetag()">save</a>
+    <a class="tagright" href="#" @click.prevent="savetag(model.id)">save</a>
      <a class="tagright" href="#" @click="showAddTags = false">close</a>
                 </div>
                   </b-popover>
         <form @submit.prevent="savePost">
+
           <b-btn class="badge badge-pill badge-warning tags" type="submit" variant="success"><img src="../assets/png/check-2x.png"></b-btn>
             <b-form-group>
                <span v-for="tag in splitJoin(model.tags)">
@@ -209,6 +216,10 @@ export default {
         async updateReadCount(id) {
             await api.updateReadCount(id)
             console.log(id)
+        },
+                async savetag(id) {
+          await api.updateTags(id, this.model)
+          this.show = false
         },
                 async approve(id) {
             await api.approvePost(id)
