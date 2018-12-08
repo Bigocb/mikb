@@ -325,7 +325,7 @@ export default {
                 splitJoin(theText) {
                     console.log(theText)
             if (theText) {
-              if isNaN(theText)  {
+              if (isNaN(theText))  {
                 return theText.split(',');
               }
             } else {
