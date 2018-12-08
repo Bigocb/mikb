@@ -59,7 +59,7 @@
             <span v-for="tag in splitJoin(model.tags)">
                 
             <router-link  :to="'/tags/' + tag">
-                <span class="badge badge-pill badge-success tags"  v-text="tag"></span></router-link>
+                <span class="badge badge-pill badge-success tags"  v-text="tag"></span></router-link></span>
           <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
 
         
