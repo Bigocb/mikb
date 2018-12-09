@@ -348,7 +348,6 @@ export default {
             console.log('savepost');
           console.log(this.model);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
-          console.log('saved');
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
           
