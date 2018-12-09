@@ -54,7 +54,7 @@
     <span v-if="!model.id">Not Saved</span>
           <span v-else>
           <div>saved</div>
-{{model}}
+          <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
           </span>
 
           <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
