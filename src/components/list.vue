@@ -58,7 +58,7 @@
 }
 
 .blockhd {
-  background-color: darkslategrey;
+  color: #333;
 }
 
 .resources-list li .resource-title {
