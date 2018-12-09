@@ -348,8 +348,16 @@ export default {
             console.log('savepost');
           console.log(this.model);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
+          console.log(this.model)
+          if (this.model.tags) {
+            console.log(this.model.tags);
+            if (this.model.tags < 100) {
+              await api.updateTags(this.model.id, this.model)
+            }
+          }
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
+          
         }
       }
        
