@@ -350,7 +350,6 @@ export default {
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
-          
         }
       }
        
