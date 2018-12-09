@@ -59,6 +59,11 @@
 
 .blockhd {
   color: #333;
+  border-bottom: 1px #333;
+}
+
+.blockhd a {
+  color: #333;
 }
 
 .resources-list li .resource-title {
