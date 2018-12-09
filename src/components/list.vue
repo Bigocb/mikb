@@ -57,7 +57,7 @@
   border-bottom: none;
 }
 
-.blochhd {
+.blockhd {
   background-color: darkslategrey;
 }
 
