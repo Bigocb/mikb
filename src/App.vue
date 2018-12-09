@@ -56,9 +56,6 @@
           <div>saved</div>
           <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
           </span>
-
-          <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
-
         
      <b-popover triggers="click" :show.sync="show" target="popoverButton-sync" title="Add Tags">
                 <div>
