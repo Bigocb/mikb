@@ -345,7 +345,8 @@ export default {
         },
       async savePost() {
         if (this.model.id) {
-          console.log(this.model.tags);
+            console.log('savepost');
+          console.log(this.model);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
           console.log(this.model)
           if (this.model.tags) {
