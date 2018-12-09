@@ -14,7 +14,7 @@
  
   
    <div  v-for="block in blocks" :slot="block.id">
-   <div> <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/x.png"></a>
+   <div class="blockhd"> <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/x.png"></a>
 </div>
     <div><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
                 <div class="fo" v-html="block.title"> 
@@ -55,6 +55,10 @@
 
 .resources-list li:last-child {
   border-bottom: none;
+}
+
+.blochhd {
+  background-color: darkslategrey;
 }
 
 .resources-list li .resource-title {
