@@ -310,7 +310,6 @@ export default {
             console.log(id)
         },
                 async savetag() {
-                    console.log(this.model)
           await api.updateTags(this.model.id, this.model)
           this.show = false
         },
@@ -345,8 +344,7 @@ export default {
         },
       async savePost() {
         if (this.model.id) {
-            console.log('savepost');
-          console.log(this.model);
+          console.log(this.model.tags);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
           console.log(this.model)
           if (this.model.tags) {
