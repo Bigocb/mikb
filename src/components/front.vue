@@ -11,11 +11,11 @@
                   <router-link  v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
                   
                       <div>
-                        <h4>{{post.title}}</h4>
+                        <h4 v-html="post.title"></h4>
 </div>
 </router-link>
 <div>
-                        <p>{{post.summary}}</p>
+                        <p v-html="post.summary"></p>
                       </div>
                         
                       <div>

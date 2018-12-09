@@ -14,13 +14,13 @@
  
   
    <div  v-for="block in blocks" :slot="block.id">
-   
-    <p ><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
-                <div class="fo"> 
-              {{block.title}}
+   <div> <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/x.png"></a>
+</div>
+    <div><router-link  v-on:click.native="updateReadCount(block.id)" :to="'/detail/' + block.id">
+                <div class="fo" v-html="block.title"> 
             </div>
-           </router-link>          <a href="#" @click.prevent="deleteListPost(block.id, block.status)"><img src="../../assets/png/x.png"></a>
- </p>
+           </router-link>         
+            </div>     
            </div>
 
 </kanban-board>
