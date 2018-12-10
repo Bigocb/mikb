@@ -677,7 +677,6 @@ img {
         this.family = await api.getFamily(this.email)
         this.postsjava = await api.getMostReadPosts(this.family.familyid)
         this.postsapproved = await api.getApprovalPosts(this.family.familyid)
-        this.postsnew = await api.getRecentPosts(this.family.familyid)
         this.userPrefs = await api.getPrefs(this.family.familyid)
         this.poststodo = await api.getToDos(this.family.familyid)
         this.poststoread = await api.getToRead(this.family.familyid)
