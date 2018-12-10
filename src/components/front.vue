@@ -595,7 +595,7 @@ img {
         postsjava: [],
         toptags: [],
         postsapproved: [],
-        postsnew: app.posts,
+        postsnew: this.app.posts,
         poststoread: [],
         poststodo: [],
         fontSize: [10, 80],
