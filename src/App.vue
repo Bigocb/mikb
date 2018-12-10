@@ -21,7 +21,7 @@
     <!-- routes will be rendered here -->
     <router-view />
 
-    <b-modal class="navbar navbar-expand-lg navbar-dark bg-primary" ref="modal2" id="modal2" title="Search Knowledge">
+    <b-modal class="navbar navbar-expand-lg @click.prevent="refreshPosts()" navbar-dark bg-primary" ref="modal2" id="modal2" title="Search Knowledge">
         <div>
             <input type="text" v-model="search" placeholder="Search.."/>
         </div>
