@@ -269,7 +269,9 @@ export default {
 },
     computed: {
         filteredList() {
-            this.refreshPosts()
+                 this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
+            this.posts = await api.getPosts(this.family.familyid)
             return this.posts.filter(post => {
                 return post.title.toLowerCase().includes(this.search.toLowerCase())
             })
