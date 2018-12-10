@@ -348,6 +348,7 @@ export default {
           console.log(this.model.tags);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
           console.log(this.model)
+           this.refreshPosts()
           if (this.model.tags) {
             console.log(this.model.tags);
             if (this.model.tags < 100) {
@@ -356,6 +357,7 @@ export default {
           }
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
+ this.refreshPosts()
           
         }
       }
