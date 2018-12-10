@@ -348,7 +348,10 @@ export default {
           console.log(this.model.tags);
           await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
           console.log(this.model)
-           this.refreshPosts()
+        this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
+      this.postsapproved = await api.getApprovalPosts(this.family.familyid)
+            this.posts = await api.getPosts(this.family.familyid)
           if (this.model.tags) {
             console.log(this.model.tags);
             if (this.model.tags < 100) {
@@ -357,7 +360,10 @@ export default {
           }
         } else {
           await api.createPost(this.model).then(response => (this.model = response[0]))
- this.refreshPosts()
+this.email = this.account.user.email
+      this.family = await api.getFamily(this.email)
+      this.postsapproved = await api.getApprovalPosts(this.family.familyid)
+            this.posts = await api.getPosts(this.family.familyid)
           
         }
       }
