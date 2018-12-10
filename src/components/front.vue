@@ -568,7 +568,7 @@ img {
 
 <script>
   import api from '@/api'
-  import app from '@/app'
+  import app from '@/App'
   import wordcloud from 'vue-wordcloud'
   import VueHighlightJS from 'vue-highlightjs'
   import store from '../_store'
