@@ -10,7 +10,7 @@
                 <b-nav-item href="#" v-b-modal.modal4><img src="../assets/png/plus-2x.png"></b-nav-item>
                 <!-- <b-nav-item  href="#" @click.prevent="login" v-if="!activeUser">Login</b-nav-item>
           <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item> -->
-                <b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
+                <b-nav-item href="#" @click.prevent="refreshPosts" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
                 <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
                 <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
                 <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
@@ -21,7 +21,7 @@
     <!-- routes will be rendered here -->
     <router-view />
 
-    <b-modal class="navbar navbar-expand-lg @click.prevent="refreshPosts()" navbar-dark bg-primary" ref="modal2" id="modal2" title="Search Knowledge">
+    <b-modal class="navbar navbar-expand-lg  navbar-dark bg-primary" ref="modal2" id="modal2" title="Search Knowledge">
         <div>
             <input type="text" v-model="search" placeholder="Search.."/>
         </div>
