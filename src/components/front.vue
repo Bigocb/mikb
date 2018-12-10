@@ -568,7 +568,7 @@ img {
 
 <script>
   import api from '@/api'
-  import app from '@/App'
+  import app from '@/app'
   import wordcloud from 'vue-wordcloud'
   import VueHighlightJS from 'vue-highlightjs'
   import store from '../_store'
@@ -595,7 +595,7 @@ img {
         postsjava: [],
         toptags: [],
         postsapproved: [],
-        postsnew: this.app.posts,
+        postsnew: [],
         poststoread: [],
         poststodo: [],
         fontSize: [10, 80],
@@ -677,6 +677,7 @@ img {
         this.family = await api.getFamily(this.email)
         this.postsjava = await api.getMostReadPosts(this.family.familyid)
         this.postsapproved = await api.getApprovalPosts(this.family.familyid)
+        this.postsnew = await api.getRecentPosts(this.family.familyid)
         this.userPrefs = await api.getPrefs(this.family.familyid)
         this.poststodo = await api.getToDos(this.family.familyid)
         this.poststoread = await api.getToRead(this.family.familyid)
