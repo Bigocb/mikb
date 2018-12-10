@@ -568,6 +568,7 @@ img {
 
 <script>
   import api from '@/api'
+  import app from '@/app'
   import wordcloud from 'vue-wordcloud'
   import VueHighlightJS from 'vue-highlightjs'
   import store from '../_store'
@@ -594,7 +595,7 @@ img {
         postsjava: [],
         toptags: [],
         postsapproved: [],
-        postsnew: [],
+        postsnew: app.posts,
         poststoread: [],
         poststodo: [],
         fontSize: [10, 80],
