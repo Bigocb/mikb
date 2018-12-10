@@ -29,8 +29,7 @@
                 <p>
                     <router-link v-on:click.native="hideModal()" :to="'/detail/' + post.id">
                         <b-card class="dash">
-                            <div>
-                                {{post.title}}
+                            <div v-html="post.title">
                             </div>
                         </b-card>
                     </router-link>
@@ -41,8 +40,7 @@
             <div v-for="post in postsapproved" v-bind:key="post.id">
                 <p>
                         <b-card class="dash">
-                            <div>
-                                {{post.title}}
+                            <div v-html="post.title">
                             </div>
                              <a href="#" @click.prevent="approve(post.id)"> <img src="../assets/png/check-2x.png"></a>
                         </b-card>

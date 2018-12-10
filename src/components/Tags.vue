@@ -5,8 +5,7 @@
         <p>
             <router-link v-on:click.native="updateReadCount(post.id)" :to="'/detail/' + post.id">
                 <b-card class="dash">
-                    <div>
-                        {{post.title}}
+                    <div v-html="post.title">
                     </div>
                 </b-card>
             </router-link>
