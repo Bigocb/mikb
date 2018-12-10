@@ -269,9 +269,6 @@ export default {
 },
     computed: {
         filteredList() {
-                 this.email = this.account.user.email
-      this.family =  api.getFamily(this.email)
-            this.posts =  api.getPosts(this.family.familyid)
             return this.posts.filter(post => {
                 return post.title.toLowerCase().includes(this.search.toLowerCase())
             })
@@ -332,15 +329,19 @@ export default {
         },
         hideModal() {
             this.$refs.modal2.hide()
+              this.refreshPosts()
         },
                     hideModalTags() {
             this.$refs.modal3.hide()
+              this.refreshPosts()
         },
                             hideModal3() {
             this.$refs.modal4.hide()
+              this.refreshPosts()
         },
         hideModal4() {
             this.$refs.modal5.hide()
+              this.refreshPosts()
         },
       async savePost() {
         if (this.model.id) {
