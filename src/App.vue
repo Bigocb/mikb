@@ -269,6 +269,7 @@ export default {
 },
     computed: {
         filteredList() {
+            this.refreshPosts()
             return this.posts.filter(post => {
                 return post.title.toLowerCase().includes(this.search.toLowerCase())
             })
