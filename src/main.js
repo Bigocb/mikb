@@ -52,10 +52,10 @@ marked.setOptions({
   gfm: true,
   tables: true,
   breaks: true,
-  sanitize: true,
+  sanitize: false,
   smartLists: true,
   smartypants: true,
-  xhtml: false
+  xhtml: true
 });
 
 /* eslint-disable no-new */
