@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'http://parents.myplex.life',
+  baseURL: 'https://parents.myplex.life',
   json: true
 })
 
