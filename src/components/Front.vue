@@ -1,7 +1,7 @@
 <template>
       <b-container fluid class="container">
         <b-row class="row">
-          <b-col cols="8">
+          <b-col>
              <div class="dash">
               <h3>Last Few Adds</h3>
               </div>
