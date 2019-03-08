@@ -1,7 +1,5 @@
 <template>
 <div>
-
- 
 <div v-if="showPlaces == true" class="dash">
 <b-form-textarea rows="1" v-model="newList.name"></b-form-textarea>
 <a href="#" @click.prevent="addList(newList.newList)"> <img src="../../assets/png/x.png"></a>
