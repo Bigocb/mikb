@@ -28,28 +28,28 @@
               </div>
           </b-col>
 
-          <b-col cols="4">
-          <b-row>
+          <!--<b-col cols="4">-->
+          <!--<b-row>-->
 
-            <div class="dash">
-              <h3>Top Tags</h3>
-</div>
-          <wordcloud class="card dash"
-      :data="toptags"
-      nameKey="tag"
-      valueKey="count"
-      :color="myColors"
-      :wordClick="wordClickHandler">
-      </wordcloud>
+            <!--<div class="dash">-->
+              <!--<h3>Top Tags</h3>-->
+<!--</div>-->
+          <!--<wordcloud class="card dash"-->
+      <!--:data="toptags"-->
+      <!--nameKey="tag"-->
+      <!--valueKey="count"-->
+      <!--:color="myColors"-->
+      <!--:wordClick="wordClickHandler">-->
+      <!--</wordcloud>-->
 
-          </b-row>
-          <b-row>
-                      <div class="dash">
-              <h3>Placeholder</h3>
-</div>
-          </b-row>
+          <!--</b-row>-->
+          <!--<b-row>-->
+                      <!--<div class="dash">-->
+              <!--<h3>Placeholder</h3>-->
+<!--</div>-->
+          <!--</b-row>-->
 
-          </b-col>
+          <!--</b-col>-->
 </b-row>
   </b-container>
 </template>
