@@ -93,6 +93,7 @@
       <find>check</find>
       <find>marked</find>
       <find>edit</find>
+      <find>router</find>
     </findStrings>
   </component>
   <component name="Git.Settings">

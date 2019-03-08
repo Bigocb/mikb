@@ -552,7 +552,7 @@ img {
 
     .row {
         margin-bottom: 20px;
-        margin-right: 10px;
+        margin-right: 5px;
     }
 </style>
 
