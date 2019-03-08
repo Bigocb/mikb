@@ -12,17 +12,15 @@
                   
                       <div>
                         <h4 v-html="post.title"></h4>
-</div>
-</router-link>
-<div>
+                      </div>
+                    </router-link>
+                      <div>
                         <p v-html="post.summary"></p>
                       </div>
-                        
                       <div>
                       <h6>{{post.lastupdate}}</h6>
                       </div>
                     </b-card>
-                
                 </div>
 
               </div>
@@ -50,7 +48,7 @@
           <!--</b-row>-->
 
           <!--</b-col>-->
-</b-row>
+    </b-row>
   </b-container>
 </template>
 <style>
@@ -551,6 +549,10 @@ img {
   .icon--ei-sc-telegram {
     fill: #08c
   }
+
+    .row {
+        margin-bottom: 10px;
+    }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/evil-icons/x.y.z/evil-icons.min.js">

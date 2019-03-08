@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8e50ecf-ee90-46e1-a749-7877e2bf84c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Front.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Front.vue" afterDir="false" />
-    </list>
+    <list default="true" id="f8e50ecf-ee90-46e1-a749-7877e2bf84c2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +12,7 @@
     <session id="1204272509">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.5" value="2" />
@@ -130,8 +127,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="675" />
-    <option name="y" value="23" />
+    <option name="x" value="967" />
+    <option name="y" value="85" />
     <option name="width" value="2619" />
     <option name="height" value="1186" />
   </component>
@@ -226,7 +223,7 @@
       <workItem from="1544630158977" duration="3707000" />
       <workItem from="1545058640691" duration="1836000" />
       <workItem from="1549405054828" duration="222000" />
-      <workItem from="1552058152019" duration="755000" />
+      <workItem from="1552058152019" duration="1362000" />
     </task>
     <task id="LOCAL-00001" summary="- Testing removal of 2nd column on front">
       <created>1552058308257</created>
@@ -235,14 +232,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552058308257</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Testing removal of 2nd column on front">
+      <created>1552059581633</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552059581633</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6613000" />
+    <option name="totallyTimeSpent" value="7220000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="675" y="23" width="2619" height="1186" extended-state="0" />
+    <frame x="1184" y="23" width="2619" height="1186" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2811889" />
