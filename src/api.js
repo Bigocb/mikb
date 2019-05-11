@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://parents.myplex.life',
+  baseURL: 'https://api.mikn.app',
   json: true
 })
 
