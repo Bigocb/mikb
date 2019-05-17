@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
+import Vue2Sidebar from 'vue2-sidebar';
 import VueSimplemde from 'vue-simplemde'
 import wordcloud from 'vue-wordcloud'
 import 'simplemde/dist/simplemde.min.css'
@@ -32,6 +33,7 @@ Vue.use(wysiwyg, {}); // config is
 
 // ENABLE USE 3RD PARTY PLUGINS
 Vue.use(VueResource);
+Vue.use(Vue2Sidebar);
 Vue.use(VuePaginate);
 Vue.use(VueRouter);
 Vue.use(BootstrapVue)

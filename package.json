@@ -46,6 +46,7 @@
     "vue-wordcloud": "^1.1.1",
     "vue-wysiwyg": "^1.7.2",
     "vue2-medium-editor": "^1.1.6",
+    "vue2-sidebar": "0.0.17",
     "vuedraggable": "^2.17.0",
     "vuex": "^3.0.1"
   },

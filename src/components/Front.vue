@@ -1,5 +1,10 @@
 <template>
       <b-container fluid class="container">
+          <div>
+              ...
+              <vue2-sidebar :links="Array"></vue2-sidebar>
+              ...
+          </div>
         <b-row class="row">
           <b-col>
              <div class="dash">
