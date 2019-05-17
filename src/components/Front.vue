@@ -579,6 +579,12 @@ img {
   import draggable from 'vuedraggable'
   import { mapState, mapActions } from "vuex";
   export default {
+      computed: {
+          ...mapState({
+              account: state => state.account,
+              users: state => state.users.all
+          })
+      },
      components: {
             draggable,
             wordcloud
@@ -660,11 +666,7 @@ img {
   },
     async created() {
       this.refreshPosts()
-      this.email = this.account.user.email
-      console.log(this.account.user.email)
-      console.log(this.email)
-      this.family = await api.getFamily(this.email)
-      this.model = Object.assign({}, this.family, this.approved)
+      this.model = Object.assign({}, this.account.user.familyid, this.approved)
       this.allTags = await api.getTags()
     },
     methods: {
@@ -676,17 +678,7 @@ img {
       console.log('wordClickHandler', tag, count, vm);
     },
       async refreshPosts() {
-        this.email = this.account.user.email
-        this.family = await api.getFamily(this.email)
-        this.postsjava = await api.getMostReadPosts(this.family.familyid)
-        this.postsapproved = await api.getApprovalPosts(this.family.familyid)
-        this.postsnew = await api.getRecentPosts(this.family.familyid)
-        this.userPrefs = await api.getPrefs(this.family.familyid)
-        this.poststodo = await api.getToDos(this.family.familyid)
-        this.poststoread = await api.getToRead(this.family.familyid)
-        this.toptags = await api.getTopTags()
-        console.log(this.poststoread)
-        this.postsarchive = await api.getArchived(this.family.familyid)
+        this.postsnew = await api.getRecentPosts(this.account.user.familyid)
       },
       updateSelected(selectedItem) {
         this.selectedPlace = selectedItem;
@@ -715,9 +707,7 @@ img {
         this.tags = await api.getTags()
       },
       async setPrefs() {
-        console.log(this.userPrefs)
-        console.log(this.family.familyid)
-        await api.setPrefs(this.family.familyid, this.userPrefs)
+        await api.setPrefs(this.account.user.familyid, this.userPrefs)
       },
       async savePost() {
         if (this.model.id) {
@@ -751,7 +741,5 @@ img {
         }
       }
     }
-  }
-</script>
   }
 </script>

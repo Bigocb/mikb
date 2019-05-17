@@ -346,12 +346,10 @@
                 console.log('editor ready!', editor)
             },
             async refreshPosts() {
-                this.email = this.account.user.email
-                this.family = await api.getFamily(this.email)
-                this.postsapproved = await api.getApprovalPosts(this.family.familyid)
-                this.posts = await api.getPosts(this.family.familyid)
-                this.allTags = await api.getTags()
-                this.model = Object.assign({}, this.family, this.approved, this.summary)
+                // this.postsapproved = await api.getApprovalPosts(this.family.familyid)
+                this.posts = await api.getPosts(this.account.user.familyid)
+                // this.allTags = await api.getTags()
+                this.model = Object.assign({}, this.account.user.familyid, this.approved, this.summary)
             },
             async updateReadCount(id) {
                 await api.updateReadCount(id)
@@ -403,8 +401,8 @@
                     await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
                     console.log(this.model)
                     this.email = this.account.user.email
-                    this.family = await api.getFamily(this.email)
-                    this.posts = await api.getPosts(this.family.familyid)
+                    // this.family = await api.getFamily(this.email)
+                    this.posts = await api.getPosts(this.account.user.familyid)
                     if (this.model.tags) {
                         console.log(this.model.tags);
                         if (this.model.tags < 100) {
@@ -414,8 +412,8 @@
                 } else {
                     await api.createPost(this.model).then(response => (this.model = response[0]))
                     this.email = this.account.user.email
-                    this.family = await api.getFamily(this.email)
-                    this.posts = await api.getPosts(this.family.familyid)
+                    // this.family = await api.getFamily(this.email)
+                    this.posts = await api.getPosts(this.account.user.familyid)
 
                 }
             }

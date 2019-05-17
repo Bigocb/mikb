@@ -119,5 +119,8 @@ export default {
   },
   deletePost(id) {
     return this.execute('delete', `/task/${id}`)
-  }
+  },
+    getNewsSources() {
+        return this.execute('get', `/news/sources`)
+    }
 }
