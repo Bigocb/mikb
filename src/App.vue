@@ -1,25 +1,21 @@
 <template>
-    <div id="app">
+    <div>
+        <vue2-sidebar heading="KB" :links="links" :header-links="header">
+            <router-view></router-view>
+            <!--<router-view>-->
+                <!--<router-link tag="li" to="/foo">-->
+                    <!--<a>/foo</a>-->
+                <!--</router-link>-->
+                <!--<a href="#" v-b-modal.modal4><img src="../assets/png/plus-2x.png"></a>-->
+                <!--<b-navbar-nav>-->
 
-        <b-navbar class="navbar navbar-expand-lg navbar-dark bg-primary" toggleable="no">
-            <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-            <b-navbar-brand to="/">KB</b-navbar-brand>
-            <b-collapse is-nav id="nav_collapse">
-                <b-navbar-nav>
-                    <b-nav-item href="#" v-b-modal.modal4><img src="../assets/png/plus-2x.png"></b-nav-item>
-                    <b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>
-                    <b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>
-                    <b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>
-                    <b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>
-                    <h5>
-                    <b-nav-item class="badge badge-pill badge-danger bsize" v-b-modal.modal5>{{postsapproved.length}}
-                    </b-nav-item>
-                    </h5>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-        <router-view/>
-
+            <!--<b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>-->
+            <!--<b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>-->
+            <!--<b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>-->
+            <!--<b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>-->
+                <!--</b-navbar-nav>-->
+            <!--</router-view>-->
+        </vue2-sidebar>
         <b-modal class="navbar navbar-expand-lg  navbar-dark bg-primary" ref="modal2" id="modal2"
                  title="Search Knowledge">
             <div>
@@ -74,7 +70,7 @@
                         src="../assets/png/check-2x.png"></b-btn>
                 <b-form-group>
 
-                    <h4>Title: </h4>
+                    <h4>Titl: </h4>
                     <div class="bg-light titles">
                         <quill-editor class="editor-example bubble"
                                       ref="myTextEditor"
@@ -121,6 +117,29 @@
             </div>
         </b-modal>
     </div>
+    <!--<div id="app">-->
+
+        <!--<b-navbar class="navbar navbar-expand-lg navbar-dark bg-primary" toggleable="no">-->
+            <!--<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>-->
+            <!--<b-navbar-brand to="/">KB</b-navbar-brand>-->
+            <!--<b-collapse is-nav id="nav_collapse">-->
+                <!--<b-navbar-nav>-->
+                    <!--<b-nav-item href="#" v-b-modal.modal4><img src="../assets/png/plus-2x.png"></b-nav-item>-->
+                    <!--<b-nav-item href="#" v-b-modal.modal2><img src="../assets/png/magnifying-glass-2x.png"></b-nav-item>-->
+                    <!--<b-nav-item href="#" v-b-modal.modal3><img src="../assets/png/tags-2x.png"></b-nav-item>-->
+                    <!--<b-nav-item to="/user"><img src="../assets/png/person-2x.png"></b-nav-item>-->
+                    <!--<b-nav-item to="/list"><img src="../assets/png/list-2x.png"></b-nav-item>-->
+                    <!--<h5>-->
+                    <!--<b-nav-item class="badge badge-pill badge-danger bsize" v-b-modal.modal5>{{postsapproved.length}}-->
+                    <!--</b-nav-item>-->
+                    <!--</h5>-->
+                <!--</b-navbar-nav>-->
+            <!--</b-collapse>-->
+        <!--</b-navbar>-->
+        <!--<router-view/>-->
+
+
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
 </template>
 <style>
     .h-tooltip {
@@ -168,6 +187,7 @@
 <script>
     import {mapState, mapActions} from "vuex";
     import api from '@/api'
+    // import VueRouter from 'vue-router';
     import 'quill/dist/quill.core.css'
     import 'quill/dist/quill.snow.css'
     import 'quill/dist/quill.bubble.css'
@@ -181,6 +201,32 @@
         name: 'app',
         data() {
             return {
+                links: [
+            // {
+            //     label: 'Home', href: '/home', links: [
+            //     {label: 'Home #1', href: '/home1'},
+            //     {
+            //         label: 'Home #2', href: '/home2', links: [
+            //             {label: 'Home #2.1', href: '/home1.1', icon: 'fa-warning'},
+            //             {
+            //                 label: 'Home #2.2', href: '/home1.2', links: [
+            //                     {label: 'Home #2.2.1', href: '/home1', icon: 'fa-plus-circle'},
+            //                     {label: 'Home #2.2.2', href: '/home3'},
+            //                 ]
+            //             },
+            //             {label: 'Home #2.3', href: '/home1.3'},
+            //         ]
+            //     },
+            //     {label: 'Home #3', href: '/home3'},
+            // ],
+            //
+                    {label: 'Home', href: '/'}        ,
+            {label: 'New Post', href: '/new-post', icon: 'fa-glass'},
+            {label: 'Lists', href: '/list'}
+        ],
+            header: [
+                {label: 'User', path: '/user'}
+            ],
                 editorOption: {
                     modules: {
                         toolbar: [
@@ -339,6 +385,9 @@
             hideModalTags() {
                 this.$refs.modal3.hide()
                 this.refreshPosts()
+            },
+            showModal() {
+                this.$root.$emit('bv::show::modal', 'modal4', '#btnShow')
             },
             hideModal3() {
                 this.$refs.modal4.hide()

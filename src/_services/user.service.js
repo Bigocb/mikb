@@ -25,7 +25,7 @@ function login(username, password) {
         })
     };
 
-    return fetch(`https://parents.myplex.life/users/authenticate`, requestOptions)
+    return fetch(`https://api.mikn.app/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response
@@ -51,7 +51,7 @@ function register(user) {
         },
         body: JSON.stringify(user)
     };
-    return fetch(`https://parents.myplex.life/users/register`, requestOptions).then(handleResponse);
+    return fetch(`https://api.mikn.app/users/register`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
@@ -60,7 +60,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`https://parents.myplex.life/users`, requestOptions).then(handleResponse);
+    return fetch(`https://api.mikn.app/users`, requestOptions).then(handleResponse);
 }
 
 

@@ -1,32 +1,67 @@
 <template>
   <div class="container-fluid mt-4">
     <b-row>
-      <b-col>
-            <div v-if="showPlaces == false">
+        <span v-if="!model.id">Not Saved</span>
+        <span v-else>
+          <div>saved</div>
+          <a id="popoverButton-sync" variant="primary" class="badge badge-pill badge-warning tags">add</a>
+          </span>
 
-
+        <b-popover triggers="click" :show.sync="show" target="popoverButton-sync" title="Add Tags">
+            <div>
+                <select v-model="model.tags">
+                    <option v-for="tag in allTags" :value="tag.id" v-bind:key="tag.id">
+                        {{ tag.tag }}
+                    </option>
+                </select>
+                <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
+                <a href="#" @click.prevent="addTags(newTag.tag)"> </a>
+                <a class="tagright" href="#" @click.prevent="savetag()">save</a>
+                <a class="tagright" href="#" @click="showAddTags = false">close</a>
+            </div>
+        </b-popover>
         <form @submit.prevent="savePost">
-        test
-                  <span v-if="!model.id">Not Saved</span>
-          <span v-else>saved</span>
-          <b-btn class="badge badge-pill badge-warning tags" @click="showPlaces = false" type="submit" variant="success"><img src="../../assets/png/check-2x.png"></b-btn>
+
+            <b-btn class="badge badge-pill badge-warning tags" type="submit" variant="success">Save</b-btn>
             <b-form-group>
+
                 <h4>Title: </h4>
-                <b-form-textarea rows="1" v-model="model.title"></b-form-textarea>
+                <div class="bg-light titles">
+                    <quill-editor class="editor-example bubble"
+                                  ref="myTextEditor"
+                                  v-model="model.title"
+                                  :options="editorOption2"
+                                  @blur="onEditorBlur($event)"
+                                  @focus="onEditorFocus($event)"
+                                  @ready="onEditorReady($event)">
+                    </quill-editor>
+
+                </div>
                 <h4>Summary: </h4>
-                <b-form-textarea rows="1" v-model="model.summary"></b-form-textarea>
+                <div class="bg-light titles">
+                    <quill-editor class="editor-example bubble"
+                                  ref="myTextEditor"
+                                  v-model="model.summary"
+                                  :options="editorOption2"
+                                  @blur="onEditorBlur($event)"
+                                  @focus="onEditorFocus($event)"
+                                  @ready="onEditorReady($event)">
+                    </quill-editor>
+                </div>
             </b-form-group>
-            <markdown-editor v-model="model.task"></markdown-editor>
+            <div class="quill-editor alert-light">
+                <quill-editor ref="myTextEditor"
+                              v-model="model.task"
+                              :options="editorOption"
+                              @blur="onEditorBlur($event)"
+                              @focus="onEditorFocus($event)"
+                              @ready="onEditorReady($event)">
+                </quill-editor>
+            </div>
         </form>
 
-            </div>
- 
-  
-      </b-col>
     </b-row>
-    <b-col>
-  
-    </b-col>
+
   </div>
 </template>
 <style>
@@ -108,7 +143,6 @@
     width: 100%;
     height: 100%;
     background: inherit;
-    fill: inherit;
     pointer-events: none;
     transform: translateX(0);
     -ms-transform: translate(.5px, -.3px)
@@ -231,8 +265,16 @@
   import VueHighlightJS from 'vue-highlightjs'
   import { mapState, mapActions } from "vuex";
   import hljs from 'highlight.js'
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
+
+  import {quillEditor} from 'vue-quill-editor'
   
   export default {
+      components: {
+          quillEditor
+      },
     data() {
   
       return {
@@ -242,8 +284,49 @@
         search: '',
                 email: {},
         showPlaces: false,
+          newTag: {},
         loading: false,
         posts: [],
+          show: false,
+          editorOption: {
+              modules: {
+                  toolbar: [
+                      ['bold', 'italic', 'underline', 'strike'],
+                      ['blockquote', 'code-block'],
+                      [{'header': 1}, {'header': 2}],
+                      [{'list': 'ordered'}, {'list': 'bullet'}],
+                      [{'script': 'sub'}, {'script': 'super'}],
+                      [{'indent': '-1'}, {'indent': '+1'}],
+                      [{'direction': 'rtl'}],
+                      [{'size': ['small', false, 'large', 'huge']}],
+                      [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                      [{'font': []}],
+                      [{'color': []}, {'background': []}],
+                      [{'align': []}],
+                      ['clean'],
+                      ['link', 'image', 'video']
+                  ],
+                  syntax: {
+                      highlight: text => hljs.highlightAuto(text).value
+                  }
+              }
+          },
+          editorOption2: {
+              theme: 'bubble',
+              placeholder: "输入任何内容，支持html",
+              modules: {
+                  toolbar: [
+                      ['bold', 'italic', 'underline', 'strike'],
+                      [{'list': 'ordered'}, {'list': 'bullet'}],
+                      [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                      [{'color': []}, {'background': []}],
+                      [{'font': []}],
+                      [{'align': []}],
+                      ['link', 'image'],
+                      ['clean']
+                  ]
+              }
+          },
         allTags: {},
         model: {},
         family: {},
@@ -267,6 +350,18 @@
       this.allTags = await api.getTags()
     },
     methods: {
+        editor() {
+            return this.$refs.myTextEditor.quill
+        },
+        onEditorBlur(editor) {
+            console.log('editor blur!', editor)
+        },
+        onEditorFocus(editor) {
+            console.log('editor focus!', editor)
+        },
+        onEditorReady(editor) {
+            console.log('editor ready!', editor)
+        },
       sortBy: function(key) {
         this.sortKey = key
         this.sortOrders[key] = this.sortOrders[key] * -1
