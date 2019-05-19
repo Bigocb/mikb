@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import PostsManager from '@/components/PostsManager'
 import NewPost from '@/components/NewPost'
 import Front from '@/components/Front'
+import News from '@/components/news'
 import Detail from '@/components/Detail'
 import list from '@/components/list'
 import Tags from '@/components/Tags'
@@ -68,6 +69,10 @@ let router = new Router({
       path: '/register',
       component: RegisterPage
     },
+      {
+          path: '/news',
+          component: News
+      },
     {
       path: '*',
       redirect: '/'
@@ -79,7 +84,7 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/login', '/register'];
-  const authRequired = !publicPages.includes(to.path);
+  const  authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
   if (authRequired && !loggedIn) {
     return next('/login');

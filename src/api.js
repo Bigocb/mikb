@@ -114,6 +114,9 @@ export default {
   getTags() {
     return this.execute('get', `/tags`)
   },
+    getUsersNews(familyid) {
+        return this.execute('get', `/news/user/${familyid}`)
+    },
   getTopTags() {
     return this.execute('get', `/top/tags`)
   },

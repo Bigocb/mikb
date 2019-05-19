@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue2-sidebar heading="KB" :links="links" :header-links="header">
+        <vue2-sidebar :links="links" >
             <router-view></router-view>
             <!--<router-view>-->
                 <!--<router-link tag="li" to="/foo">-->
@@ -196,6 +196,10 @@
 
     export default {
         components: {
+            ...mapState({
+                account: state => state.account,
+                users: state => state.users.all
+            }),
             quillEditor
         },
         name: 'app',
@@ -222,7 +226,8 @@
             //
                     {label: 'Home', href: '/'}        ,
             {label: 'New Post', href: '/new-post', icon: 'fa-glass'},
-            {label: 'Lists', href: '/list'}
+            {label: 'Lists', href: '/list'},
+                    {label: 'News', href: '/news'}
         ],
             header: [
                 {label: 'User', path: '/user'}
@@ -347,7 +352,8 @@
             },
             async refreshPosts() {
                 // this.postsapproved = await api.getApprovalPosts(this.family.familyid)
-                this.posts = await api.getPosts(this.account.user.familyid)
+                console.log(this);
+                this.posts = await api.getPosts(this.account.user.familyid);
                 // this.allTags = await api.getTags()
                 this.model = Object.assign({}, this.account.user.familyid, this.approved, this.summary)
             },
@@ -399,10 +405,10 @@
                 if (this.model.id) {
                     console.log(this.model.tags);
                     await api.updatePost(this.model.id, this.model).then(response => (this.model = response[0]))
-                    console.log(this.model)
-                    this.email = this.account.user.email
+                    console.log(this.account);
+                    this.email = this.account.user.email;
                     // this.family = await api.getFamily(this.email)
-                    this.posts = await api.getPosts(this.account.user.familyid)
+                    this.posts = await api.getPosts(this.account.user);
                     if (this.model.tags) {
                         console.log(this.model.tags);
                         if (this.model.tags < 100) {

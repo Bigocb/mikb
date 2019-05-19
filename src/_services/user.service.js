@@ -14,6 +14,7 @@ export const userService = {
 };
 
 function login(username, password) {
+    console.log(username);
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -28,8 +29,10 @@ function login(username, password) {
     return fetch(`https://api.mikn.app/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
+            console.log(user.token);
             // login successful if there's a jwt token in the response
             if (user.token) {
+
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
             }

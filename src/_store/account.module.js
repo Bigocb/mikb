@@ -4,6 +4,7 @@ import {
 import router from '../router'
 
 const user = JSON.parse(localStorage.getItem('user'));
+// console.log(user);
 const state = user ? {
     status: {
         loggedIn: true
@@ -27,8 +28,9 @@ const actions = {
         userService.login(username, password)
             .then(
                 user => {
+                    console.log(user);
                     commit('loginSuccess', user);
-                    router.push('/dashboard');
+                    router.push('/front');
                 },
                 error => {
                     commit('loginFailure', error);
