@@ -733,7 +733,7 @@ img {
         await this.refreshPosts()
       },
       async deletePost(id) {
-        if (confirm('Are you sure you want to delete this post?')) {
+        if (confirm('Are you sure you want to delete this?')) {
           // if we are editing a post we deleted, remove it from the form
           await api.deletePost(id)
           await this.refreshPosts()
