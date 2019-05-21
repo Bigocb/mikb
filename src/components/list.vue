@@ -302,15 +302,15 @@
       async refreshPosts() {
         this.email = this.account.user.email
         this.family = await api.getFamily(this.email)
-        this.postsjava = await api.getMostReadPosts(this.family.familyid)
+        // this.postsjava = await api.getMostReadPosts(this.family.familyid)
          this.stages = await api.getUserLists(this.family.familyid)
         this.blocks = await api.getUserListPosts(this.family.familyid)
-        this.postsapproved = await api.getApprovalPosts(this.family.familyid)
-        this.postsnew = await api.getRecentPosts(this.family.familyid)
-        this.userPrefs = await api.getPrefs(this.family.familyid)
-        this.poststodo = await api.getToDos(this.family.familyid)
-        this.poststoread = await api.getToRead(this.family.familyid)
-        this.postsarchive = await api.getArchived(this.family.familyid)
+        // this.postsapproved = await api.getApprovalPosts(this.family.familyid)
+        // this.postsnew = await api.getRecentPosts(this.family.familyid)
+        // this.userPrefs = await api.getPrefs(this.family.familyid)
+        // this.poststodo = await api.getToDos(this.family.familyid)
+        // this.poststoread = await api.getToRead(this.family.familyid)
+        // this.postsarchive = await api.getArchived(this.family.familyid)
       },
       updateSelected(selectedItem) {
         this.selectedPlace = selectedItem;
