@@ -225,7 +225,7 @@
             // ],
             //
                     {label: 'Home', href: '/'}        ,
-            {label: 'New Post', href: '/new-post', icon: 'fa-glass'},
+            {label: 'New', href: '/new-post', icon: 'fa-glass'},
             {label: 'Lists', href: '/list'},
                     {label: 'News', href: '/news'}
         ],
