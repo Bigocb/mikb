@@ -117,6 +117,12 @@ export default {
     getUsersNews(familyid) {
         return this.execute('get', `/news/user/${familyid}`)
     },
+    addNewsSource(data) {
+        return this.execute('put', '/news/sources',data)
+    },
+    getUsersSources(familyid) {
+        return this.execute('put', `/news/user/${familyid}`)
+    },
   getTopTags() {
     return this.execute('get', `/top/tags`)
   },

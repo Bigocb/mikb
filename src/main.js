@@ -23,7 +23,7 @@ import {
 var marked = require('marked');
 import wysiwyg from "vue-wysiwyg";
 import VeeValidate from 'vee-validate';
-
+Vue.component('multiselect', Multiselect);
 import {
   store
 } from './_store';
