@@ -54,7 +54,7 @@ function register(user) {
         },
         body: JSON.stringify(user)
     };
-    return fetch(`https://api.mikn.app/users/register`, requestOptions).then(handleResponse);
+    return fetch(`https://api.mikn.app/users/authenticate?new=true`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
