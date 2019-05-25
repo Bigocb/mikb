@@ -44,8 +44,8 @@
                             </option>
                         </select>
                         <b-form-textarea rows="1" v-model="newTag.tag"></b-form-textarea>
-                        <a href="#" @click.prevent="addTags(newTag.tag)"> <img src="../../assets/png/check-2x.png"></a>
-                        <a class="tagright" href="#" @click.prevent="savetag()">save</a>
+                        <a href="#" @click.prevent="addTags(newTag.tag)">new tag</a>
+                        <a class="tagright" href="#" @click.prevent="savetag()">save to post</a>
                         <a class="tagright" href="#" @click="showAddTags = false">close</a>
                     </div>
                 </b-popover>
@@ -568,11 +568,11 @@
             },
             async refreshPosts() {
                 this.posts = await api.getSinglePost(this.$route.params.id)
-                this.email = this.account.user.email
-                this.family = await api.getFamily(this.email)
+                // this.email = this.account.user.email
+                // this.family = await api.getFamily(this.email)
                 this.allTags = await api.getTags()
                 this.listMemberships = await api.getPostList(this.$route.params.id)
-                this.stages = await api.getUserLists(this.family.familyid)
+                this.stages = await api.getUserLists(this.account.user.familyid)
             },
             async updatePost(id) {
                 console.log(id)
@@ -593,7 +593,7 @@
             async deleteListPost(postid, listid) {
                 this.deleteFromList.postid = Object.assign(postid)
                 this.deleteFromList.listid = Object.assign(listid)
-                await api.deleteUserListPosts(this.family.familyid, this.deleteFromList)
+                await api.deleteUserListPosts(this.account.user.familyid, this.deleteFromList)
                 this.refreshPosts()
             },
             async addToList(listid, postid, title) {
@@ -602,16 +602,15 @@
                 this.addList.postid = '' + postid + ''
                 this.addList.name = title
                 console.log(this.addList)
-                await api.createUserListPosts(this.family.familyid, this.addList)
+                await api.createUserListPosts(this.account.user.familyid, this.addList)
                 this.posts = await api.getSinglePost(this.$route.params.id)
                 this.allTags = await api.getTags()
                 this.refreshPosts()
             },
             async deleteTags(tag) {
+                this.deleteTag.taskid = Object.assign(this.$route.params.id)
                 this.deleteTag.tag = Object.assign(tag)
-                console.log(this.deleteTag)
-                console.log(this.$route.params.id)
-                await api.deleteTags(this.$route.params.id, this.deleteTag)
+                await api.deleteTags(this.deleteTag)
                 this.posts = await api.getSinglePost(this.$route.params.id)
             },
             async populatePostToEdit(props) {
@@ -622,7 +621,9 @@
                 this.tags = await api.getTags()
             },
             async savetag() {
-                await api.updateTags(this.$route.params.id, this.model)
+                this.model.taskid = Object.assign(this.$route.params.id)
+                console.log('model',this.model);
+                await api.updateTags(this.model)
                 this.posts = await api.getSinglePost(this.$route.params.id)
                 this.show = false
             },

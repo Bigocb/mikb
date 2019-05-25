@@ -22,7 +22,7 @@ export default {
     })
   },
   getPosts(familyid) {
-    return this.execute('get', `/tasks/${familyid}`)
+    return this.execute('get', `/posts/${familyid}`)
   },
   getTagPosts(tag) {
     return this.execute('get', `/tag/${tag}`)
@@ -31,7 +31,7 @@ export default {
     return this.execute('get', `/read/tasks/${familyid}`)
   },
   getRecentPosts(familyid) {
-    return this.execute('get', `/person/recent/${familyid}`)
+    return this.execute('get', `/posts/${familyid}?recent=true`)
   },
   getPrefs(familyid) {
     return this.execute('get', `/person/prefs/${familyid}`)
@@ -40,10 +40,10 @@ export default {
     return this.execute('put', `/person/prefs/${familyid}`, data)
   },
   getSinglePost(id) {
-    return this.execute('get', `/task/${id}`)
+    return this.execute('get', `/post/${id}`)
   },
   getPostList(id) {
-    return this.execute('get', `/task/list/${id}`)
+    return this.execute('get', `/post/list/${id}`)
   },
   getApprovalPosts(familyid) {
     return this.execute('get', `/approve/tasks/${familyid}`)
@@ -88,24 +88,24 @@ export default {
   },
   createPost(data) {
     console.log(data);
-    return this.execute('post', '/new/tasks', data)
+    return this.execute('post', '/post/new', data)
   },
   updatePost(id, data) {
-    return this.execute('put', `/task/${id}`, data)
+    return this.execute('put', `/post/${id}`, data)
   },
   updateReadCount(id) {
-    return this.execute('post', `/task/${id}`)
+    return this.execute('post', `/post/${id}`)
     console.log(`api ${id}`)
   },
   approvePost(id) {
     return this.execute('put', `/app/task/${id}`)
   },
-  updateTags(id, data) {
-    return this.execute('put', `/add/tags/${id}`, data)
+  updateTags(data) {
+    return this.execute('put', `/post/tag?add=true`, data)
   },
-  deleteTags(id, data) {
+  deleteTags(data) {
     console.log(data)
-    return this.execute('delete', `/delete/tags/${id}`, data)
+    return this.execute('delete', '/post/tag?delete=true', data)
   },
   addTags(data) {
     console.log(data);

@@ -345,8 +345,8 @@
     async created() {
       this.refreshPosts()
       this.email = this.account.user.email
-      this.family = await api.getFamily(this.email)
-      this.model = Object.assign({}, this.family, this.approved)
+      // this.family = await api.getFamily(this.email)
+      this.model = Object.assign({}, this.account.user.familyid, this.approved)
       this.allTags = await api.getTags()
     },
     methods: {
@@ -368,7 +368,7 @@
       },
       async refreshPosts() {
       this.email = this.account.user.email
-      this.family = await api.getFamily(this.email)
+      // this.family = await api.getFamily(this.email)
         this.posts = await api.getPosts(this.family.familyid)
       },
       updateSelected(selectedItem) {
@@ -397,6 +397,7 @@
           }
         } else {
           //TODO: Fix tags for new posts
+            this.model.familyid = Object.assign(this.account.user.familyid)
           await api.createPost(this.model)
           //   if (this.model.tags) {
           //   console.log(this.model.tags);
@@ -405,7 +406,7 @@
           //   }
           // }
         }
-        this.model = Object.assign({}, this.family, this.approved)
+        this.model = Object.assign({}, this.account.user.familyid, this.approved)
         await this.refreshPosts()
       },
       async deletePost(id) {
@@ -413,7 +414,7 @@
           // if we are editing a post we deleted, remove it from the form
           await api.deletePost(id)
           await this.refreshPosts()
-          this.model = Object.assign({}, this.family, this.approved)
+          this.model = Object.assign({}, this.account.user.familyid, this.approved)
         }
       }
     }

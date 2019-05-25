@@ -239,12 +239,10 @@
     async created() {
       this.refreshPosts()
       this.email = this.account.user.email
-      console.log(this.account.user.email)
-      console.log(this.email)
         	const value = ''
   	this.cdnRequest(value)
-      this.family = await api.getFamily(this.email)
-      this.model = Object.assign({}, this.family, this.approved)
+      // this.family = await api.getFamily(this.email)
+      this.model = Object.assign({}, this.account.user.familyid, this.approved)
       this.allTags = await api.getTags()
     },
     methods: {
@@ -254,7 +252,7 @@
       },
               async addList() {
             console.log(this.newList)
-            await api.createUserLists(this.family.familyid,this.newList)
+            await api.createUserLists(this.account.user.familyid,this.newList)
                this.posts = await api.getSinglePost(this.$route.params.id)
                this.allTags = await api.getTags()
                this.newList = ''
@@ -289,7 +287,7 @@
       this.blocks.find(b => b.id === Number(id)).status = status;
       this.updateData = this.blocks.find(b => b.id === Number(id))
       console.log(this.updateData)
-      api.updateUserListPosts(this.family.familyid,this.updateData)
+      api.updateUserListPosts(this.account.user.familyid,this.updateData)
     },
     searchQuery(value) {
     	this.showLoadingSpinner = true
@@ -300,11 +298,12 @@
       this.selectedResources.splice(index, 1)
     },
       async refreshPosts() {
-        this.email = this.account.user.email
-        this.family = await api.getFamily(this.email)
+        // this.email = this.account.user.email
+        // this.family = await api.getFamily(this.email)
         // this.postsjava = await api.getMostReadPosts(this.family.familyid)
-         this.stages = await api.getUserLists(this.family.familyid)
-        this.blocks = await api.getUserListPosts(this.family.familyid)
+         this.stages = await api.getUserLists(this.account.user.familyid)
+          console.log('stages',this.stages)
+        this.blocks = await api.getUserListPosts(this.account.user.familyid)
         // this.postsapproved = await api.getApprovalPosts(this.family.familyid)
         // this.postsnew = await api.getRecentPosts(this.family.familyid)
         // this.userPrefs = await api.getPrefs(this.family.familyid)
@@ -341,20 +340,20 @@
     async deleteList(name) {
         this.deletingList.name = Object.assign(name[0])
         console.log(this.deletingList)
-        this.tags = await api.deleteUserLists(this.family.familyid, this.deletingList)
+        this.tags = await api.deleteUserLists(this.account.user.familyid, this.deletingList)
         console.log(this.deletingList)
                this.refreshPosts()
       },
     async deleteListPost(postid,listid) {
         this.deleteFromList.postid = Object.assign(postid)
         this.deleteFromList.listid = Object.assign(listid)
-        await api.deleteUserListPosts(this.family.familyid, this.deleteFromList)
+        await api.deleteUserListPosts(this.account.user.familyid, this.deleteFromList)
                this.refreshPosts()
       },
       async setPrefs() {
-        console.log(this.userPrefs)
-        console.log(this.family.familyid)
-        await api.setPrefs(this.family.familyid, this.userPrefs)
+        // console.log(this.userPrefs)
+        // console.log(this.family.familyid)
+        await api.setPrefs(this.account.user.familyid, this.userPrefs)
       },
       async savePost() {
         if (this.model.id) {
@@ -376,7 +375,7 @@
           //   }
           // }
         }
-        this.model = Object.assign({}, this.family, this.approved)
+        this.model = Object.assign({}, this.account.user.familyid, this.approved)
         await this.refreshPosts()
       },
       async deletePost(id) {
@@ -384,7 +383,7 @@
           // if we are editing a post we deleted, remove it from the form
           await api.deletePost(id)
           await this.refreshPosts()
-          this.model = Object.assign({}, this.family, this.approved)
+          this.model = Object.assign({}, this.account.user.familyid, this.approved)
         }
       }
     }
