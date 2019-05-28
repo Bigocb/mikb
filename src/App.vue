@@ -183,6 +183,16 @@
         column-gap: 40px;
         column-width: 300px;
     }
+
+    #sidebar[data-v-79e831cc] {
+        min-width: 220px;
+        background-color: #5CA4A9;
+        max-width: 220px;
+        transition: all .3s;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow: inset 0 0 10px #000000;
+    }
 </style>
 <script>
     import {mapState, mapActions} from "vuex";

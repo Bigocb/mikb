@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8e50ecf-ee90-46e1-a749-7877e2bf84c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewPost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list.vue" afterDir="false" />
-    </list>
+    <list default="true" id="f8e50ecf-ee90-46e1-a749-7877e2bf84c2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +12,7 @@
     <session id="1204272509">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.2" value="1" />
@@ -224,7 +219,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="29" />
+    <option name="x" value="567" />
+    <option name="y" value="60" />
     <option name="width" value="1680" />
     <option name="height" value="952" />
   </component>
@@ -355,7 +351,7 @@
       <workItem from="1558099667797" duration="17614000" />
       <workItem from="1558470203092" duration="13508000" />
       <workItem from="1558635225943" duration="5000" />
-      <workItem from="1558645000483" duration="9846000" />
+      <workItem from="1558645000483" duration="10440000" />
     </task>
     <task id="LOCAL-00001" summary="- Testing removal of 2nd column on front">
       <created>1552058308257</created>
@@ -396,10 +392,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49427000" />
+    <option name="totallyTimeSpent" value="50021000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="29" width="1680" height="952" extended-state="6" />
+    <frame x="567" y="60" width="1680" height="952" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27688503" />
@@ -412,7 +408,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.36086404" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36086404" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
