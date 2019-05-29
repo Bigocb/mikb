@@ -24,7 +24,6 @@
     </div>
                 </b-row>
             </b-col>
-            <b-col></b-col>
         <b-col>
             <b-row>
                 <h4>Available Sources</h4>
@@ -49,6 +48,11 @@
         </b-row>
     </b-container>
 </template>
+<style>
+    .col {
+        margin-right: 15px;
+    }
+</style>
 <script>
 
     import {mapState, mapActions} from "vuex";

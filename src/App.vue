@@ -141,6 +141,7 @@
 
     <!--&lt;!&ndash;</div>&ndash;&gt;-->
 </template>
+
 <style>
     .h-tooltip {
         z-index: 99999 !important;
@@ -186,13 +187,43 @@
 
     #sidebar[data-v-79e831cc] {
         min-width: 220px;
-        background-color: #5CA4A9;
+        color: #95E7CD;
+        background-color: #1DC690;
         max-width: 220px;
         transition: all .3s;
         -moz-box-shadow: inset 0 0 10px #000000;
         -webkit-box-shadow: inset 0 0 10px #000000;
         box-shadow: inset 0 0 10px #000000;
     }
+    ul li a[data-v-5bc3effb] {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+        transition: none;
+        color: #95E7CD;
+        font-family: 'Lato', sans-serif;
+    }
+
+    #sidebar.active[data-v-79e831cc] {
+        margin-left: -220px;
+    }
+
+    li {
+        border-color: #95E7CD;
+        border-bottom-style: solid;
+        border-width: .5px;
+    }
+
+    li:hover {
+        background-color: #55D6AD;
+        -moz-box-shadow: inset 0 0 2px #000000;
+        -webkit-box-shadow: inset 0 0 2px #000000;
+        box-shadow: inset 0 0 2px #000000;
+    }
+
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 </style>
 <script>
     import {mapState, mapActions} from "vuex";
